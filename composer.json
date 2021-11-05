@@ -1,0 +1,32 @@
+{
+  "name": "vendor_name/valheim-server-ui",
+  "minimum-stability": "dev",
+  "require": {
+    "amphp/http-server": "v3.x-dev",
+    "amphp/log": "v2.x-dev",
+    "amphp/socket": "v2.x-dev",
+    "amphp/websocket-server": "v3.x-dev",
+    "amphp/dbus": "dev-master",
+    "amphp/http-server-router": "v2.x-dev",
+    "amphp/http-server-static-content": "v2.x-dev",
+    "amphp/http-server-form-parser": "v2.x-dev",
+    "amphp/http-server-session": "v3.x-dev",
+    "amphp/cluster": "v2.x-dev",
+    "amphp/parser": "^1",
+    "monolog/monolog": "^2.3.4",
+    "ext-pcntl": "*",
+    "league/climate": "^3.7.0",
+    "rdlowrey/auryn": "^v1.4.4",
+    "google/protobuf": "^v3.18.0",
+    "wookieb/relative-date" : "^0.1",
+    "ext-sqlite3": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "GPBMetadata\\": "proto-out/GPBMetadata",
+      "ValheimServerUI\\Proto\\": "proto-out/ValheimServerUI/Proto",
+      "ValheimServerUI\\": "src"
+    },
+    "classmap": ["lib/"]
+  }
+}

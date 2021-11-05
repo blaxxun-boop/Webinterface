@@ -1,0 +1,5 @@
+vendor
+composer.phar
+.idea
+database.sqlite
+.editorconfig

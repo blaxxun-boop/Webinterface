@@ -1,0 +1,95 @@
+.t-input {
+    border-radius: 0; background: #fff; border: 1px solid #ddd; margin: 0 5px; padding: 0 8px;
+    line-height: 28px; height: 28px; box-sizing: border-box; appearance: none;
+    font-family: 'Lato', sans-serif; font-size: 13px;
+}
+
+.t-input:disabled { background: #eee; }
+
+.t-button {
+    border: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    padding: 0px 8px;
+    border-radius: 2px;
+    cursor: default;
+    color: #444;
+    font-size: 12px;
+    line-height: 30px;
+    height: 30px;
+    background: #f5f5f5 url(../img/button.png) left bottom repeat-x;
+    appearance: none;
+    text-align: center;
+    display: inline-block;
+}
+
+.t-button, .t-button:hover, .t-button:focus {
+    text-decoration: none;
+}
+
+.t-button:hover {
+    border: 1px solid rgba(0,0,0,.2);
+    border-bottom: 1px solid rgba(0,0,0,.3);
+    box-shadow: 0 3px 5px -5px rgba(0,0,0,.3);
+    cursor: default;
+}
+
+.t-button-disabled, .t-button-disabled:hover, .t-button:disabled, .t-button:disabled:hover {
+    border: 1px solid rgba(0,0,0,.1);
+    color: #888;
+    box-shadow: none;
+    cursor: default;
+}
+
+.t-button-icon {
+    margin-right: 8px;
+}
+
+.t-button-switch {
+    width: 100px;
+    text-align: center;
+}
+
+.t-checkbox + .button-switch,
+.t-button-red {
+    background-image: url(../img/button_off.png);
+}
+
+.t-checkbox:checked + .button-switch,
+.t-button-green {
+    background-image: url(../img/button_on.png);
+}
+
+/* TODO: Remove Tag Selector */
+#ui-datepicker-div a:hover {
+    cursor: pointer;
+}
+
+.t-textarea {
+    border-radius: 0; background: #fff; border: 1px solid #ddd; margin: 0 5px; padding: 0 8px;
+    line-height: 20px; min-height: 200px; box-sizing: border-box; appearance: none;
+    font-family: 'Lato', sans-serif; font-size: 13px;
+}
+
+#player-autofill {
+    position: absolute;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.2);
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.player-autofill {
+    display: block;
+    padding: 2px 8px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background: #fafafa;
+    cursur: default;
+}
+
+.player-autofill:hover {
+    background: #fff;
+}
+
+.player-autofill:last-of-type {
+    border-bottom: 0;
+}
