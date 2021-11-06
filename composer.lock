@@ -709,12 +709,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "12067b132097011a3a3553460f9641c8c4b8e501"
+                "reference": "1e4688837527fdbd81a9c0bdfcfaac2ddf6ed43f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/12067b132097011a3a3553460f9641c8c4b8e501",
-                "reference": "12067b132097011a3a3553460f9641c8c4b8e501",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/1e4688837527fdbd81a9c0bdfcfaac2ddf6ed43f",
+                "reference": "1e4688837527fdbd81a9c0bdfcfaac2ddf6ed43f",
                 "shasum": ""
             },
             "require": {
@@ -799,7 +799,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-24T21:35:26+00:00"
+            "time": "2021-11-06T13:47:31+00:00"
         },
         {
             "name": "amphp/http-server-form-parser",
@@ -1187,12 +1187,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/parallel.git",
-                "reference": "b625c1a2260535cde2d571085ecdd707f024afa1"
+                "reference": "746d5321223dcee53277d358b09cf68336a575c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parallel/zipball/b625c1a2260535cde2d571085ecdd707f024afa1",
-                "reference": "b625c1a2260535cde2d571085ecdd707f024afa1",
+                "url": "https://api.github.com/repos/amphp/parallel/zipball/746d5321223dcee53277d358b09cf68336a575c9",
+                "reference": "746d5321223dcee53277d358b09cf68336a575c9",
                 "shasum": ""
             },
             "require": {
@@ -1253,7 +1253,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-25T17:27:15+00:00"
+            "time": "2021-11-06T13:00:44+00:00"
         },
         {
             "name": "amphp/parser",
@@ -2765,12 +2765,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "caa18c929095bb9c07e09d435c0d928a5d68665b"
+                "reference": "70e67dc797a259e1df2bd1130c1105de3cb8d0b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/caa18c929095bb9c07e09d435c0d928a5d68665b",
-                "reference": "caa18c929095bb9c07e09d435c0d928a5d68665b",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/70e67dc797a259e1df2bd1130c1105de3cb8d0b8",
+                "reference": "70e67dc797a259e1df2bd1130c1105de3cb8d0b8",
                 "shasum": ""
             },
             "require": {
@@ -2830,7 +2830,7 @@
                 "issues": "https://github.com/revoltphp/event-loop/issues",
                 "source": "https://github.com/revoltphp/event-loop/tree/main"
             },
-            "time": "2021-10-24T17:13:13+00:00"
+            "time": "2021-11-06T05:11:40+00:00"
         },
         {
             "name": "seld/cli-prompt",
