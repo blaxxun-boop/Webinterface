@@ -74,7 +74,7 @@ Type=simple
 Restart=on-failure
 RestartSec=10
 WorkingDirectory=/home/testuser/webinterface
-ExecStart=php8.1 server.php -l 0.0.0.0:9999 -s 127.0.0.1:5982
+ExecStart=/usr/bin/php8.1 server.php -l 0.0.0.0:9999 -s 127.0.0.1:5982
 
 [Install]
 WantedBy=default.target
