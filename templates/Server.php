@@ -119,7 +119,7 @@
 				</fieldset>
 			</form>
 		</div>
-		<div class="bigcard">
+		<div class="bigcard" style="width: 100%;">
 			<h1>Logs</h1>
 			<div id="loglines" style="white-space: pre-wrap; text-align: left;"><?=htmlspecialchars($logHistory)?></div>
 		</div>

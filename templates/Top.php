@@ -26,10 +26,6 @@ $TOP_NAVIGATION = [
 <!-- HEADER -->
 <header id="header">
     <div id="header-inner">
-        <!-- LOGO -->
-        <a href="./" id="logo"><?=$serverState->serverConfig->getServerName()?></a>
-        <!-- /LOGO -->
-
         <!-- MOBILE MENU BUTTON -->
         <input class="nodisplay" id="mobile-menu-switch-checkbox" type="checkbox">
         <label class="mobileOnly" id="mobile-menu-switch" for="mobile-menu-switch-checkbox">
@@ -39,7 +35,11 @@ $TOP_NAVIGATION = [
 
         <!-- MENU -->
         <nav id="menu" role="navigation">
-            <?php if (empty($skipNav)): ?>
+			<!-- LOGO -->
+			<a href="./" id="logo"><?=$serverState->serverConfig->getServerName()?></a>
+			<!-- /LOGO -->
+
+			<?php if (empty($skipNav)): ?>
 				<?php foreach ($TOP_NAVIGATION as $key => $section): $section = array_filter($section, $allowsRoute(...)); ?>
 					<?php if ($section): ?>
 						<span class="menu-drop">

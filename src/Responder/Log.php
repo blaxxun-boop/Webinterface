@@ -11,7 +11,6 @@ use Amp\Websocket\Server\Gateway;
 use Amp\Websocket\Server\WebsocketServerObserver;
 use ValheimServerUI\Permission;
 use ValheimServerUI\ServerManager;
-use ValheimServerUI\Tpl;
 use function Amp\coroutine;
 use function ValheimServerUI\requestCallable;
 
@@ -21,7 +20,7 @@ class Log implements ClientHandler, WebsocketServerObserver {
 	public function onStart(HttpServer $server, Gateway $gateway): void {
 		coroutine(function () use ($gateway) {
 			foreach ($this->serverManager->logIterator() as $logLine) {
-				$gateway->broadcast($logLine);
+				$gateway->broadcast($logLine)->ignore();
 			}
 		});
 	}

@@ -25,16 +25,15 @@
 }
 
 #logo {
-    position: absolute;
-    left: 35px;
-    top: 3px;
     font-family: Carattere, sans-serif;
     font-size: 30px;
+    padding: 15px;
+    position: relative;
+    top: 3px;
 }
 
 #menu {
     padding-right: 15px;
-    padding-left: 170px;
 }
 
 .menu-drop {

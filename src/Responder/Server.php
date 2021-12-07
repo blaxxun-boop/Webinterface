@@ -63,16 +63,19 @@ class Server implements ClientHandler, WebsocketServerObserver {
 
 	public function handleClient(Gateway $gateway, Client $client, Request $request, Response $response): void {
 		$this->clients[$client->getId()] = $client;
-		while ($message = $client->receive()) {
-			// nothing to handle
+		try {
+			while ($message = $client->receive()) {
+				// nothing to handle
+			}
+		} finally {
+			unset($this->clients[$client->getId()]);
 		}
-		unset($this->clients[$client->getId()]);
 	}
 
 	private function broadcastServiceStateUpdate(ServiceStatus $serviceStatus) {
 		$json = \json_encode(["serviceState" => $serviceStatus]);
 		foreach ($this->clients as $client) {
-			$client->send($json);
+			$client->send($json)->ignore();
 		}
 	}
 
@@ -94,8 +97,8 @@ class Server implements ClientHandler, WebsocketServerObserver {
 				case "linux":
 				case "darwin":
 					$meminfo = array_combine(...array_map(null, ...array_map(fn($l) => array_slice(preg_split("(:?\s+)", trim($l)), 0, 2), file("/proc/meminfo"))));
-					$freeMem = $meminfo["MemFree"] * 1024;
 					$this->maxMemory = $meminfo["MemTotal"] * 1024;
+					$freeMem = $meminfo["MemAvailable"] * 1024;
 					break;
 				default:
 					$freeMem = 0;
@@ -108,7 +111,7 @@ class Server implements ClientHandler, WebsocketServerObserver {
 
 			$json = \json_encode(["memory" => array_values($this->memoryUsed), "loadAvg" => array_values($this->loadAvgs)]);
 			foreach ($this->clients as $client) {
-				$client->send($json);
+				$client->send($json)->ignore();
 			}
 		});
 	}
