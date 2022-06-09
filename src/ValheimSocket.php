@@ -50,7 +50,6 @@ class ValheimSocket {
 			while (true) {
 				try {
 					$this->socket = connect($address);
-					$this->socket->unreference();
 					$this->logger->warning(($firstConnection ? "C" : "Rec") . "onnected to $address after $attempts attempts");
 					$firstConnection = false;
 					break;
@@ -63,6 +62,7 @@ class ValheimSocket {
 			}
 
 			($this->resetConnection)();
+			$this->state->connectionReady->apply(fn() => $this->socket->unreference());
 			$this->state->active = true;
 
 			$parser = $this->parser();

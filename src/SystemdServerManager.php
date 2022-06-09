@@ -30,7 +30,7 @@ class SystemdServerManager extends ServerManager {
 				$this->systemctl = "sudo systemctl";
 			}
 			$dbus_socket = "/var/run/dbus/system_bus_socket";
-		} elseif (preg_match('(^/user\.slice/user-(?P<uid>\d+)\.slice/user@\d+\.service/(?P<service>.*\.service)$)', $this->cgroup, $serviceInfo)) {
+		} elseif (preg_match('(^/user\.slice/user-(?P<uid>\d+)\.slice/user@\d+\.service/(.*\.slice/)?(?P<service>.*\.service)$)', $this->cgroup, $serviceInfo)) {
 			if (posix_getuid() == $serviceInfo["uid"]) {
 				$this->systemctl = "XDG_RUNTIME_DIR='/var/run/user/{$serviceInfo["uid"]}' systemctl --user";
 			} else {
@@ -170,6 +170,7 @@ class SystemdServerManager extends ServerManager {
 	}
 
 	public function formatLog(&$out): Parser {
+		$out = [];
 		return new Parser((function () use (&$out) {
 			while ($jsonLine = yield "\n") {
 				$formattedJson = "";

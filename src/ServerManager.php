@@ -27,7 +27,8 @@ abstract class ServerManager {
 			$state->connectionReady->await();
 			$pid = $state->serverConfig->getProcessId();
 		}
-		if (preg_match('(^\d+:name=systemd:\K/.*\.service$)m', file_get_contents("/proc/$pid/cgroup"), $cgroup)) {
+		$cgroups = file_get_contents("/proc/$pid/cgroup");
+		if (preg_match('(^\d+:name=systemd:\K/.*\.service$)m', $cgroups, $cgroup) || preg_match('(^\d+::\K/.*\.slice/.*\.service$)m', $cgroups, $cgroup)) {
 			$stmt = $db->prepare("INSERT OR REPLACE INTO keys (key, value) VALUES ('defaultCgroup', :cgroup)");
 			$stmt->bindValue("cgroup", $cgroup[0]);
 			$stmt->execute();
