@@ -10,10 +10,8 @@ message WebinterfacePlayer {
 
   message Statistics {
     int64 lastTouch = 1;
-    int32 kills = 2;
-    int32 deaths = 3;
-    int32 crafts = 4;
-    int32 builds = 5;
+    reserved 2 to 5;
+    map<string, float> stats = 6;
   }
 
   Statistics statistics = 3;
@@ -61,4 +59,24 @@ message Maintenance {
 message IngameMessage {
   repeated string steamId = 1;
   string message = 2;
+}
+
+message RaiseSkill {
+  string id = 1;
+  string name = 2;
+  string skillName = 3;
+  int32 level = 4;
+}
+
+message ResetSkill {
+  string id = 1;
+  string name = 2;
+  string skillName = 3;
+}
+
+message GiveItem {
+  string id = 1;
+  string name = 2;
+  string itemName = 3;
+  int32 itemQuantity = 4;
 }

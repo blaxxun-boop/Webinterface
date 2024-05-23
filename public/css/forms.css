@@ -83,7 +83,7 @@
     padding: 2px 8px;
     border-bottom: 1px solid rgba(0,0,0,.1);
     background: #fafafa;
-    cursur: default;
+    cursor: default;
 }
 
 .player-autofill:hover {
@@ -92,4 +92,13 @@
 
 .player-autofill:last-of-type {
     border-bottom: 0;
+}
+
+.decent-remove-button {
+    background: none;
+    border: none;
+    color: #666;
+    padding: 0 2px;
+    margin: 0 2px;
+    transform: scaleY(0.8);
 }

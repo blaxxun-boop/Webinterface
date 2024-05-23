@@ -274,6 +274,8 @@ addRoute("GET", "/Logout", $logout->logoutUser(...));
 
 $playerListing = $injector->make(Responder\PlayerListing::class);
 addRoute("GET", "/players", $playerListing->show(...), Permission::View_Players);
+addRoute("POST", "/players/stat/add", $playerListing->addStat(...), Permission::View_Players);
+addRoute("POST", "/players/stat/remove", $playerListing->removeStat(...), Permission::View_Players);
 
 $onlinePlayers = $injector->make(Responder\OnlinePlayers::class);
 addRoute("GET", "/players/online", $onlinePlayers->show(...), Permission::Manage_Players);

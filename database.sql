@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS permission (group_id INTEGER, permission TEXT, FOREIG
 CREATE INDEX IF NOT EXISTS group_id ON permission (group_id);
 CREATE TABLE IF NOT EXISTS permissionGroup (group_id INTEGER PRIMARY KEY AUTOINCREMENT, groupname TEXT UNIQUE);
 CREATE TABLE IF NOT EXISTS keys (key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS activePlayerStats (stat TEXT PRIMARY KEY);
 
 INSERT OR IGNORE INTO permissionGroup VALUES (0, 'Logged out User'), (1, 'Admin');
 INSERT OR IGNORE INTO permission VALUES (1, 'Admin');

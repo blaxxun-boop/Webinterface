@@ -77,7 +77,6 @@ class ValheimSocket {
 				$deferred->error($unreachable);
 				EventLoop::cancel($timeoutWatcher);
 			}
-
 		}
 	}
 
