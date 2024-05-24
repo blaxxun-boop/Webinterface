@@ -5,20 +5,11 @@ namespace ValheimServerUI\Responder;
 use Amp\File\FilesystemException;
 use Amp\Http\Server\FormParser\Form;
 use Amp\Http\Server\Request;
-use Amp\Http\Server\Response;
-use Amp\Http\Server\Router;
-use Amp\Http\Server\Session\Session;
-use Amp\Http\Status;
 use ValheimServerUI\Permission;
 use ValheimServerUI\PermissionSet;
-use ValheimServerUI\Proto\ModList;
-use ValheimServerUI\Proto\WebinterfaceMod;
 use ValheimServerUI\ServerState;
 use ValheimServerUI\Tpl;
 use ValheimServerUI\ValheimSocket;
-use function Amp\Http\Server\FormParser\parseForm;
-use function Amp\Http\Server\redirectTo;
-use function ValheimServerUI\json_response;
 
 class SteamIDFile {
 	private const LISTFILES = ["permittedlist.txt", "adminlist.txt", "bannedlist.txt"];
@@ -59,7 +50,7 @@ class SteamIDFile {
 	}
 
 	public function writeListFiles(Request $request, Tpl $tpl, \SQLite3 $db, PermissionSet $permissions) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$savePath = $this->state->serverConfig->getSavePath();
 		$saveLists = [];
 		foreach (self::LISTFILES as $listfile) {

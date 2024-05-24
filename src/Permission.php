@@ -6,6 +6,7 @@ enum Permission {
 	case Admin;
 	case View_Players;
 	case Manage_Players;
+	case Manage_Stats;
 	case View_Mods;
 	case Manage_Mods;
 	case View_Users;

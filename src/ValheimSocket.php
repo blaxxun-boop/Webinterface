@@ -3,8 +3,7 @@
 namespace ValheimServerUI;
 
 use Amp\ByteStream\StreamException;
-use Amp\Deferred;
-use Amp\Future;
+use Amp\DeferredFuture;
 use Amp\Socket\ConnectException;
 use Amp\Socket\Socket;
 use Google\Protobuf\Internal\Message;
@@ -15,12 +14,11 @@ use ValheimServerUI\Proto\Maintenance;
 use ValheimServerUI\Proto\ModList;
 use ValheimServerUI\Proto\PlayerList;
 use ValheimServerUI\Proto\ServerConfig;
-use function Amp\coroutine;
 use function Amp\delay;
 use function Amp\Socket\connect;
 
 class ValheimSocket {
-	/** @var array{0: Deferred, 1: ?Message, 2: string} */
+	/** @var array{0: DeferredFuture, 1: ?Message, 2: string} */
 	private array $pendingCommands = [];
 	/** @var array{0: callable, 1: ?Message}[] */
 	private array $callbacks = [];
@@ -38,7 +36,7 @@ class ValheimSocket {
 		}
 
 		$this->resetConnection = $socketCommands->_resetConnection(...);
-		coroutine(fn() => $this->watch($socket));
+		\Amp\async(fn() => $this->watch($socket));
 	}
 
 	private function watch(string $address): void {
@@ -62,7 +60,7 @@ class ValheimSocket {
 			}
 
 			($this->resetConnection)();
-			$this->state->connectionReady->apply(fn() => $this->socket->unreference());
+			$this->state->connectionReady->finally(fn() => $this->socket->unreference());
 			$this->state->active = true;
 
 			$parser = $this->parser();
@@ -139,7 +137,7 @@ class ValheimSocket {
 		$commandId = ++$this->commandId;
 		$timeoutWatcher = EventLoop::delay($timeout, fn() => $this->commandTimeout($commandId));
 		EventLoop::unreference($timeoutWatcher);
-		[$deferred] = $this->pendingCommands[$commandId] = [new Deferred, $out, $timeoutWatcher];
+		[$deferred] = $this->pendingCommands[$commandId] = [new DeferredFuture, $out, $timeoutWatcher];
 		$data = \pack("VV", $commandId, \strlen($command)) . $command;
 		if ($message !== null) {
 			$raw = $message->serializeToString();
@@ -180,7 +178,7 @@ class ValheimSocket {
 }
 
 class SocketCommands {
-	public ?Deferred $ready = null;
+	public ?DeferredFuture $ready = null;
 
 	public function __construct(private ServerState $state) {
 		$this->_resetConnection();
@@ -188,9 +186,9 @@ class SocketCommands {
 	}
 
 	public function _resetConnection() {
-		$this->ready ??= new Deferred;
+		$this->ready ??= new DeferredFuture;
 		$this->state->connectionReady = $this->ready->getFuture();
-		coroutine(function () {
+		\Amp\async(function () {
 			foreach ($this->state->connectionLossWatchers as $watcher) {
 				$watcher();
 			}

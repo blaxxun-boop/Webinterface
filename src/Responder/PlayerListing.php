@@ -2,19 +2,19 @@
 
 namespace ValheimServerUI\Responder;
 
+use Amp\Http\Server\FormParser\Form;
 use Amp\Http\Server\Request;
-use ValheimServerUI\Proto\PlayerList;
-use ValheimServerUI\ServerState;
+use ValheimServerUI\Permission;
+use ValheimServerUI\PermissionSet;
 use ValheimServerUI\Tpl;
 use ValheimServerUI\ValheimSocket;
-use function Amp\Http\Server\FormParser\parseForm;
 use function Amp\Http\Server\redirectTo;
 
 class PlayerListing {
 	public function __construct(public ValheimSocket $socket) {}
 
 	public function addStat(Request $request, \SQLite3 $db) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		if ($stat = $form->getValue("stat")) {
 			$stmt = $db->prepare("INSERT OR IGNORE INTO activePlayerStats (stat) VALUES (:stat)");
 			$stmt->bindValue("stat", $stat);
@@ -25,7 +25,7 @@ class PlayerListing {
 	}
 
 	public function removeStat(Request $request, \SQLite3 $db) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		if ($stat = $form->getValue("stat")) {
 			$stmt = $db->prepare("DELETE FROM activePlayerStats WHERE stat = :stat");
 			$stmt->bindValue("stat", $stat);
@@ -35,7 +35,7 @@ class PlayerListing {
 		return redirectTo("/players");
 	}
 
-	public function show(Request $request, Tpl $tpl, \SQLite3 $db) {
+	public function show(Request $request, Tpl $tpl, \SQLite3 $db, PermissionSet $permissions) {
 		$tpl->load(__DIR__ . "/../../templates/PlayerListing.php");
 
 		$playerList = $this->socket->getPlayerList();
@@ -48,6 +48,7 @@ class PlayerListing {
 
 		$tpl->set('table', $playerList);
 		$tpl->set('stats', $stats);
+		$tpl->set('canManage', $permissions->allows(Permission::Manage_Stats));
 
 		return $tpl->render();
 	}

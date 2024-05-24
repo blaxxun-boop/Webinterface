@@ -8,7 +8,6 @@ use Amp\Http\Server\Session\Session;
 use ValheimServerUI\PermissionSet;
 use ValheimServerUI\ServerState;
 use ValheimServerUI\Tpl;
-use function Amp\Http\Server\FormParser\parseForm;
 use function Amp\Http\Server\redirectTo;
 
 class Main {
@@ -52,7 +51,7 @@ class Main {
 	}
 
     public function createAdmin(Request $request, \SQLite3 $db, Session $session) {
-        $form = parseForm($request);
+        $form = Form::fromRequest($request);
 
         $results = $db->query('SELECT COUNT(1) FROM user');
         [$rows] = $results->fetchArray();
@@ -65,10 +64,10 @@ class Main {
 
 			$user_id = $db->lastInsertRowID();
 
-			$session->open();
+			$session->lock();
             $session->set("user_id", $user_id);
             $session->set("username", $form->getValue("username"));
-            $session->save();
+            $session->commit();
         }
         return redirectTo("/");
     }

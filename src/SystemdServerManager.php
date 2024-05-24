@@ -4,12 +4,11 @@ namespace ValheimServerUI;
 
 use Amp\Dbus\Dbus;
 use Amp\Parser\Parser;
-use Amp\Pipeline\AsyncGenerator;
+use Amp\Pipeline\Pipeline;
 use Amp\Process\Process;
 use Amp\Socket\SocketException;
 use Monolog\Logger;
 use function Amp\ByteStream\buffer;
-use function Amp\coroutine;
 use function Amp\Socket\connect;
 
 class SystemdServerManager extends ServerManager {
@@ -44,7 +43,7 @@ class SystemdServerManager extends ServerManager {
 		}
 
 		if (file_exists($dbus_socket)) {
-			coroutine(fn() => $this->monitorDbus($dbus_socket, $dbus_user));
+			\Amp\async(fn() => $this->monitorDbus($dbus_socket, $dbus_user));
 		} elseif ($dbus_user > 0) {
 			$this->logger->warning("Cannot monitor systemd via dbus, is dbus-user-session package not installed? Live updates are disabled.");
 		}
@@ -94,7 +93,7 @@ class SystemdServerManager extends ServerManager {
 					}
 				}
 				if ($updated) {
-					coroutine(function () {
+					\Amp\async(function () {
 						foreach ($this->stateWatchers as $watcher) {
 							$watcher($this->serviceStatus);
 						}
@@ -109,8 +108,7 @@ class SystemdServerManager extends ServerManager {
 	}
 
 	protected function restart() {
-		$process = new Process("{$this->systemctl} restart {$this->service}");
-		$process->start();
+		$process = Process::start("{$this->systemctl} restart {$this->service}");
 		if ($process->join() != 0) {
 			$this->logger->error("Got error while restarting {$this->service}: " . buffer($process->getStderr()));
 		}
@@ -121,8 +119,7 @@ class SystemdServerManager extends ServerManager {
 			return $this->serviceStatus;
 		}
 
-		$process = new Process("{$this->systemctl} show {$this->service} --property StateChangeTimestamp --property ActiveState");
-		$process->start();
+		$process = Process::start("{$this->systemctl} show {$this->service} --property StateChangeTimestamp --property ActiveState");
 		if ($process->join() != 0) {
 			$this->logger->error("Got error while fetching {$this->service}: " . buffer($process->getStderr()));
 		}
@@ -141,9 +138,8 @@ class SystemdServerManager extends ServerManager {
 	}
 
 	public function logIterator(): \Traversable {
-		return new AsyncGenerator(function () {
-			$process = new Process(str_replace("systemctl", "journalctl", $this->systemctl) . " -o json -u {$this->service} --follow");
-			$process->start();
+		return Pipeline::fromIterable(function () {
+			$process = Process::start(str_replace("systemctl", "journalctl", $this->systemctl) . " -o json -u {$this->service} --follow");
 			$process->getStdout()->unreference();
 
 			$parser = $this->formatLog($out);
@@ -159,8 +155,7 @@ class SystemdServerManager extends ServerManager {
 	}
 
 	public function readLog(): string {
-		$process = new Process(str_replace("systemctl", "journalctl", $this->systemctl) . " -o json -e -u {$this->service} --no-pager");
-		$process->start();
+		$process = Process::start(str_replace("systemctl", "journalctl", $this->systemctl) . " -o json -e -u {$this->service} --no-pager");
 		$parser = $this->formatLog($out);
 		$parser->push(buffer($process->getStdout()));
 		if ($process->join() != 0) {

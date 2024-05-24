@@ -4,49 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63d5954b703cc369421a0da3cf6d2de2",
+    "content-hash": "8399a10c3f9492869d3120e43436c59a",
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v3.x-dev",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "d81275f1b713cdc610739a95bdc61021178ded83"
+                "reference": "138801fb68cfc9c329da8a7b39d01ce7291ee4b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/d81275f1b713cdc610739a95bdc61021178ded83",
-                "reference": "d81275f1b713cdc610739a95bdc61021178ded83",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/138801fb68cfc9c329da8a7b39d01ce7291ee4b0",
+                "reference": "138801fb68cfc9c329da8a7b39d01ce7291ee4b0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8",
-                "revolt/event-loop": "v1.x-dev"
+                "php": ">=8.1",
+                "revolt/event-loop": "^1 || ^0.2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "ext-json": "*",
-                "jetbrains/phpstorm-stubs": "^2019.3",
+                "amphp/php-cs-fixer-config": "^2",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "5.23.1"
             },
+            "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Amp\\": "lib"
-                },
                 "files": [
-                    "lib/functions.php",
-                    "lib/Future/functions.php",
-                    "lib/Internal/functions.php"
-                ]
+                    "src/functions.php",
+                    "src/Future/functions.php",
+                    "src/Internal/functions.php"
+                ],
+                "psr-4": {
+                    "Amp\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -85,7 +78,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/amp/issues",
-                "source": "https://github.com/amphp/amp/tree/v3"
+                "source": "https://github.com/amphp/amp/tree/v3.0.2"
             },
             "funding": [
                 {
@@ -93,48 +86,47 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-23T16:53:44+00:00"
+            "time": "2024-05-10T21:37:46+00:00"
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "4a7a7a80436017af98c46083e314307134a7cd10"
+                "reference": "daa00f2efdbd71565bf64ffefa89e37542addf93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/4a7a7a80436017af98c46083e314307134a7cd10",
-                "reference": "4a7a7a80436017af98c46083e314307134a7cd10",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/daa00f2efdbd71565bf64ffefa89e37542addf93",
+                "reference": "daa00f2efdbd71565bf64ffefa89e37542addf93",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/pipeline": "v1.x-dev",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/parser": "^1.1",
+                "amphp/pipeline": "^1",
+                "amphp/serialization": "^1",
+                "amphp/sync": "^2",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1 || ^0.2.3"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "jetbrains/phpstorm-stubs": "^2019.3",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "5.22.1"
             },
+            "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Amp\\ByteStream\\": "lib"
-                },
                 "files": [
-                    "lib/functions.php"
-                ]
+                    "src/functions.php",
+                    "src/Internal/functions.php"
+                ],
+                "psr-4": {
+                    "Amp\\ByteStream\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -151,7 +143,7 @@
                 }
             ],
             "description": "A stream abstraction to make working with non-blocking I/O simple.",
-            "homepage": "http://amphp.org/byte-stream",
+            "homepage": "https://amphp.org/byte-stream",
             "keywords": [
                 "amp",
                 "amphp",
@@ -161,9 +153,8 @@
                 "stream"
             ],
             "support": {
-                "irc": "irc://irc.freenode.org/amphp",
                 "issues": "https://github.com/amphp/byte-stream/issues",
-                "source": "https://github.com/amphp/byte-stream/tree/v2"
+                "source": "https://github.com/amphp/byte-stream/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -171,42 +162,40 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-01T11:32:37+00:00"
+            "time": "2024-02-17T04:49:38+00:00"
         },
         {
             "name": "amphp/cache",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/cache.git",
-                "reference": "ba320060e979c175cad6146257f4568342b3382d"
+                "reference": "46912e387e6aa94933b61ea1ead9cf7540b7797c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/cache/zipball/ba320060e979c175cad6146257f4568342b3382d",
-                "reference": "ba320060e979c175cad6146257f4568342b3382d",
+                "url": "https://api.github.com/repos/amphp/cache/zipball/46912e387e6aa94933b61ea1ead9cf7540b7797c",
+                "reference": "46912e387e6aa94933b61ea1ead9cf7540b7797c",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
+                "amphp/amp": "^3",
                 "amphp/serialization": "^1",
-                "amphp/sync": "v2.x-dev",
-                "php": ">=8"
-            },
-            "conflict": {
-                "amphp/file": "<3-dev || >=4"
+                "amphp/sync": "^2",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1 || ^0.2"
             },
             "require-dev": {
-                "amphp/file": "v3.x-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4"
+                "psalm/phar": "^5.4"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Amp\\Cache\\": "lib"
+                    "Amp\\Cache\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -227,12 +216,11 @@
                     "email": "rdlowrey@php.net"
                 }
             ],
-            "description": "A promise-aware caching API for Amp.",
-            "homepage": "https://github.com/amphp/cache",
+            "description": "A fiber-aware cache API based on Amp and Revolt.",
+            "homepage": "https://amphp.org/cache",
             "support": {
-                "irc": "irc://irc.freenode.org/amphp",
                 "issues": "https://github.com/amphp/cache/issues",
-                "source": "https://github.com/amphp/cache/tree/v2"
+                "source": "https://github.com/amphp/cache/tree/v2.0.1"
             },
             "funding": [
                 {
@@ -240,58 +228,67 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-16T15:46:04+00:00"
+            "time": "2024-04-19T03:38:06+00:00"
         },
         {
             "name": "amphp/cluster",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/cluster.git",
-                "reference": "d96adfafd753a04d3bdddca437336b6c71f66204"
+                "reference": "81774a2811452f9f7a87e0e62ec270895b57b967"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/cluster/zipball/d96adfafd753a04d3bdddca437336b6c71f66204",
-                "reference": "d96adfafd753a04d3bdddca437336b6c71f66204",
+                "url": "https://api.github.com/repos/amphp/cluster/zipball/81774a2811452f9f7a87e0e62ec270895b57b967",
+                "reference": "81774a2811452f9f7a87e0e62ec270895b57b967",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^3-dev",
-                "amphp/byte-stream": "^2-dev",
-                "amphp/log": "^2-dev",
-                "amphp/parallel": "^2-dev",
-                "amphp/socket": "^2-dev",
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/log": "^2",
+                "amphp/parallel": "^2.2",
+                "amphp/pipeline": "^1.1",
+                "amphp/process": "^2",
+                "amphp/serialization": "^1",
+                "amphp/socket": "^2",
+                "amphp/sync": "^2",
+                "ext-sockets": "*",
                 "league/climate": "^3",
-                "monolog/monolog": "^2 || ^1.23",
-                "php": ">=8",
-                "psr/log": "^1"
+                "monolog/monolog": "^3|^2|^1.23",
+                "php": ">=8.1",
+                "psr/log": "^3|^2|^1",
+                "revolt/event-loop": "^1"
             },
             "conflict": {
                 "amphp/file": "<3 || >=4"
             },
             "require-dev": {
-                "amphp/file": "^3-dev",
-                "amphp/http-server": "^3-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^2-dev",
-                "phpunit/phpunit": "^9"
+                "amphp/file": "^3",
+                "amphp/http-server": "^3",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "ext-pcntl": "*",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.11"
             },
             "suggest": {
                 "amphp/file": "Required for logging to a file",
                 "ext-sockets": "Required for socket transfer on systems that do not support SO_REUSEPORT"
             },
+            "default-branch": true,
             "bin": [
                 "bin/cluster"
             ],
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Cluster\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Cluster\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -326,7 +323,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/cluster/issues",
-                "source": "https://github.com/amphp/cluster/tree/v2"
+                "source": "https://github.com/amphp/cluster/tree/2.x"
             },
             "funding": [
                 {
@@ -334,7 +331,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-11T04:47:10+00:00"
+            "time": "2024-02-13T21:09:22+00:00"
         },
         {
             "name": "amphp/dbus",
@@ -342,16 +339,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dbus.git",
-                "reference": "5c0e5c09385a36ff564e0b95d677dd003c12c3ee"
+                "reference": "d152d87455deafb78845a5de9bd921d67b993b24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dbus/zipball/5c0e5c09385a36ff564e0b95d677dd003c12c3ee",
-                "reference": "5c0e5c09385a36ff564e0b95d677dd003c12c3ee",
+                "url": "https://api.github.com/repos/amphp/dbus/zipball/d152d87455deafb78845a5de9bd921d67b993b24",
+                "reference": "d152d87455deafb78845a5de9bd921d67b993b24",
                 "shasum": ""
             },
             "require": {
-                "amphp/socket": "v2.x-dev",
+                "amphp/socket": "^2",
                 "php": ">=8.1"
             },
             "require-dev": {
@@ -360,12 +357,12 @@
             "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Dbus\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Dbus\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -395,46 +392,48 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-17T01:30:55+00:00"
+            "time": "2024-05-24T00:21:01+00:00"
         },
         {
             "name": "amphp/dns",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "3407371451f6bb6e936570dfb13c6c1ff3a9a0e7"
+                "reference": "04c88e67bef804203df934703bd422ea72f46b0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/3407371451f6bb6e936570dfb13c6c1ff3a9a0e7",
-                "reference": "3407371451f6bb6e936570dfb13c6c1ff3a9a0e7",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/04c88e67bef804203df934703bd422ea72f46b0e",
+                "reference": "04c88e67bef804203df934703bd422ea72f46b0e",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/byte-stream": "v2.x-dev",
-                "amphp/cache": "v2.x-dev",
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/cache": "^2",
                 "amphp/parser": "^1",
-                "amphp/windows-registry": "v1.x-dev",
-                "daverandom/libdns": "^2.0.1",
+                "amphp/windows-registry": "^1.0.1",
+                "daverandom/libdns": "^2.0.2",
                 "ext-filter": "*",
-                "ext-json": "*",
-                "php": ">=8"
+                "php": ">=8.1",
+                "revolt/event-loop": "^1 || ^0.2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "phpunit/phpunit": "^9"
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "5.20"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Dns\\": "lib"
-                },
                 "files": [
-                    "lib/functions.php"
-                ]
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Amp\\Dns\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -474,7 +473,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/dns/issues",
-                "source": "https://github.com/amphp/dns/tree/v2"
+                "source": "https://github.com/amphp/dns/tree/v2.1.2"
             },
             "funding": [
                 {
@@ -482,49 +481,50 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-20T00:16:01+00:00"
+            "time": "2024-04-19T03:49:29+00:00"
         },
         {
             "name": "amphp/file",
-            "version": "v3.x-dev",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/file.git",
-                "reference": "7d31b42f82e9c84d6e5797667af745886c51e88d"
+                "reference": "1d51235bd8cb4973c7908e645b62c638d8c081fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/file/zipball/7d31b42f82e9c84d6e5797667af745886c51e88d",
-                "reference": "7d31b42f82e9c84d6e5797667af745886c51e88d",
+                "url": "https://api.github.com/repos/amphp/file/zipball/1d51235bd8cb4973c7908e645b62c638d8c081fe",
+                "reference": "1d51235bd8cb4973c7908e645b62c638d8c081fe",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/byte-stream": "v2.x-dev",
-                "amphp/parallel": "v2.x-dev",
-                "amphp/sync": "v2.x-dev",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/cache": "^2",
+                "amphp/parallel": "^2.1",
+                "amphp/sync": "^2",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "5.22.2"
+            },
+            "suggest": {
                 "ext-eio": "^2 || ^3",
-                "ext-uv": "^0.3 || ^0.2",
-                "phpunit/phpunit": "^9"
+                "ext-uv": "^0.3 || ^0.2"
             },
+            "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Amp\\File\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\File\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -544,7 +544,7 @@
                     "email": "me@kelunik.com"
                 }
             ],
-            "description": "Allows non-blocking access to the filesystem for Amp.",
+            "description": "Non-blocking access to the filesystem based on Amp and Revolt.",
             "homepage": "https://github.com/amphp/file",
             "keywords": [
                 "amp",
@@ -559,7 +559,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/file/issues",
-                "source": "https://github.com/amphp/file/tree/v3"
+                "source": "https://github.com/amphp/file/tree/v3.1.0"
             },
             "funding": [
                 {
@@ -567,7 +567,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-20T00:13:54+00:00"
+            "time": "2024-04-21T14:53:24+00:00"
         },
         {
             "name": "amphp/hpack",
@@ -575,21 +575,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/hpack.git",
-                "reference": "cf4f1663e9fd58f60258c06177098655ca6377a5"
+                "reference": "4f293064b15682a2b178b1367ddf0b8b5feb0239"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/hpack/zipball/cf4f1663e9fd58f60258c06177098655ca6377a5",
-                "reference": "cf4f1663e9fd58f60258c06177098655ca6377a5",
+                "url": "https://api.github.com/repos/amphp/hpack/zipball/4f293064b15682a2b178b1367ddf0b8b5feb0239",
+                "reference": "4f293064b15682a2b178b1367ddf0b8b5feb0239",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/php-cs-fixer-config": "^2",
                 "http2jp/hpack-test-case": "^1",
-                "phpunit/phpunit": "^6 | ^7"
+                "nikic/php-fuzzer": "^0.0.10",
+                "phpunit/phpunit": "^7 | ^8 | ^9"
             },
             "default-branch": true,
             "type": "library",
@@ -633,7 +634,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/hpack/issues",
-                "source": "https://github.com/amphp/hpack/tree/v3.1.1"
+                "source": "https://github.com/amphp/hpack/tree/v3.2.1"
             },
             "funding": [
                 {
@@ -641,44 +642,45 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-11T20:03:34+00:00"
+            "time": "2024-03-21T19:00:16+00:00"
         },
         {
             "name": "amphp/http",
-            "version": "dev-master",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "e2b75561011a9596e4574cc867e07a706d56394b"
+                "reference": "fe6b4dd50c1e70caf823092398074b5082e1d6da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/e2b75561011a9596e4574cc867e07a706d56394b",
-                "reference": "e2b75561011a9596e4574cc867e07a706d56394b",
+                "url": "https://api.github.com/repos/amphp/http/zipball/fe6b4dd50c1e70caf823092398074b5082e1d6da",
+                "reference": "fe6b4dd50c1e70caf823092398074b5082e1d6da",
                 "shasum": ""
             },
             "require": {
                 "amphp/hpack": "^3",
-                "php": ">=7.1"
+                "amphp/parser": "^1.1",
+                "league/uri-components": "^2.4.2 | ^7.1",
+                "php": ">=8.1",
+                "psr/http-message": "^1 | ^2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "phpunit/phpunit": "^7 || ^6.5"
+                "amphp/php-cs-fixer-config": "^2",
+                "league/uri": "^6.8 | ^7.1",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.4"
             },
             "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
             "autoload": {
+                "files": [
+                    "src/functions.php",
+                    "src/Internal/constants.php"
+                ],
                 "psr-4": {
                     "Amp\\Http\\": "src"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -688,12 +690,16 @@
                 {
                     "name": "Niklas Keller",
                     "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
             "support": {
                 "issues": "https://github.com/amphp/http/issues",
-                "source": "https://github.com/amphp/http/tree/v1.6.3"
+                "source": "https://github.com/amphp/http/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -701,62 +707,62 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-28T17:04:34+00:00"
+            "time": "2024-04-03T18:00:53+00:00"
         },
         {
             "name": "amphp/http-server",
-            "version": "v3.x-dev",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "1e4688837527fdbd81a9c0bdfcfaac2ddf6ed43f"
+                "reference": "26001b1ffac11db30c627ed4daba2088951b0ffa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/1e4688837527fdbd81a9c0bdfcfaac2ddf6ed43f",
-                "reference": "1e4688837527fdbd81a9c0bdfcfaac2ddf6ed43f",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/26001b1ffac11db30c627ed4daba2088951b0ffa",
+                "reference": "26001b1ffac11db30c627ed4daba2088951b0ffa",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/byte-stream": "v2.x-dev",
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/cache": "^2",
                 "amphp/hpack": "^3",
-                "amphp/http": "^1.6",
-                "amphp/pipeline": "v1.x-dev",
-                "amphp/socket": "v2.x-dev",
-                "cash/lrucache": "^1",
-                "league/uri": "^6",
-                "php": ">=8",
-                "psr/http-message": "^1",
-                "psr/log": "^1|^2|^3"
+                "amphp/http": "^2",
+                "amphp/pipeline": "^1",
+                "amphp/socket": "^2.1",
+                "amphp/sync": "^2",
+                "league/uri": "^6.8 | ^7.1",
+                "league/uri-interfaces": "^2.3 | ^7.1",
+                "php": ">=8.1",
+                "psr/http-message": "^1 | ^2",
+                "psr/log": "^1 | ^2 | ^3",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
-                "amphp/http-client": "v5.x-dev",
-                "amphp/log": "v2.x-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "league/uri-components": "^2",
-                "monolog/monolog": "^2 || ^1.23",
-                "phpunit/phpunit": "^9"
+                "amphp/http-client": "^5",
+                "amphp/log": "^2",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "league/uri-components": "^2.4.2 | ^7.1",
+                "monolog/monolog": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "~5.23"
             },
             "suggest": {
                 "ext-zlib": "Allows GZip compression of response bodies"
             },
+            "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
             "autoload": {
+                "files": [
+                    "src/Driver/functions.php",
+                    "src/Middleware/functions.php",
+                    "src/functions.php"
+                ],
                 "psr-4": {
                     "Amp\\Http\\Server\\": "src"
-                },
-                "files": [
-                    "src/Middleware/functions.php",
-                    "src/functions.php",
-                    "src/Server.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -791,7 +797,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server/issues",
-                "source": "https://github.com/amphp/http-server/tree/v3"
+                "source": "https://github.com/amphp/http-server/tree/v3.3.1"
             },
             "funding": [
                 {
@@ -799,43 +805,47 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-06T13:47:31+00:00"
+            "time": "2024-04-21T15:46:46+00:00"
         },
         {
             "name": "amphp/http-server-form-parser",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-form-parser.git",
-                "reference": "092c030849f848d98ccfee5ce60a571eeb6de557"
+                "reference": "6f160914a1cd9aaa104b589c0c590613600bfa70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/092c030849f848d98ccfee5ce60a571eeb6de557",
-                "reference": "092c030849f848d98ccfee5ce60a571eeb6de557",
+                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/6f160914a1cd9aaa104b589c0c590613600bfa70",
+                "reference": "6f160914a1cd9aaa104b589c0c590613600bfa70",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^3-dev",
-                "amphp/byte-stream": "^2-dev",
-                "amphp/http": "^1",
-                "amphp/http-server": "^3-dev",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/http": "^2",
+                "amphp/http-server": "^3.2",
+                "amphp/pipeline": "^1",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
-                "amphp/log": "^2-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^2-dev",
-                "phpunit/phpunit": "^9"
+                "amphp/log": "^2",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.6"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Http\\Server\\FormParser\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Http\\Server\\FormParser\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -858,19 +868,20 @@
                     "email": "aaron@trowski.com"
                 }
             ],
-            "description": "A form parser for Amp's HTTP parser.",
-            "homepage": "https://github.com/amphp/http-server-form-parser",
+            "description": "An HTTP server plugin that simplifies form data handling. Effortlessly parse incoming form submissions and extracting its data.",
+            "homepage": "https://amphp.org/http-server-form-parser",
             "keywords": [
                 "amp",
                 "amphp",
                 "async",
                 "form",
                 "http",
-                "non-blocking"
+                "non-blocking",
+                "revolt"
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server-form-parser/issues",
-                "source": "https://github.com/amphp/http-server-form-parser/tree/v2"
+                "source": "https://github.com/amphp/http-server-form-parser/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -878,36 +889,42 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-17T05:03:30+00:00"
+            "time": "2023-08-25T02:52:20+00:00"
         },
         {
             "name": "amphp/http-server-router",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-router.git",
-                "reference": "f00729beea9b2b6b2177b463d7a85289aa554658"
+                "reference": "c0434ad6b1a0899f1fba5371e991974e77df1140"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-router/zipball/f00729beea9b2b6b2177b463d7a85289aa554658",
-                "reference": "f00729beea9b2b6b2177b463d7a85289aa554658",
+                "url": "https://api.github.com/repos/amphp/http-server-router/zipball/c0434ad6b1a0899f1fba5371e991974e77df1140",
+                "reference": "c0434ad6b1a0899f1fba5371e991974e77df1140",
                 "shasum": ""
             },
             "require": {
-                "amphp/http": "^1",
-                "amphp/http-server": "^3-dev",
-                "cash/lrucache": "^1",
+                "amphp/amp": "^3",
+                "amphp/cache": "^2",
+                "amphp/http": "^2",
+                "amphp/http-server": "^3",
+                "amphp/socket": "^2",
                 "nikic/fast-route": "^1",
-                "php": ">=8"
+                "php": ">=8.1",
+                "psr/log": "^1|^2|^3"
             },
             "require-dev": {
-                "amphp/log": "^2-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^2-dev",
+                "amphp/log": "^2",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "colinodell/psr-testlogger": "^1.2",
                 "league/uri": "^6",
-                "phpunit/phpunit": "^9"
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.6"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -935,7 +952,7 @@
                     "email": "aaron@trowski.com"
                 }
             ],
-            "description": "Router responder for Amp's HTTP server.",
+            "description": "Routes to request handlers based on HTTP method and path for amphp/http-server.",
             "homepage": "https://github.com/amphp/http-server-router",
             "keywords": [
                 "http",
@@ -944,7 +961,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server-router/issues",
-                "source": "https://github.com/amphp/http-server-router/tree/v2"
+                "source": "https://github.com/amphp/http-server-router/tree/2.x"
             },
             "funding": [
                 {
@@ -952,45 +969,47 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-17T04:40:32+00:00"
+            "time": "2023-11-26T17:00:02+00:00"
         },
         {
             "name": "amphp/http-server-session",
-            "version": "v3.x-dev",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-session.git",
-                "reference": "e4236727a4d16af42ca3df39ca08c9470a736c0d"
+                "reference": "dac3188c9cb368e635cb8a4e4ff84bf128bb6818"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-session/zipball/e4236727a4d16af42ca3df39ca08c9470a736c0d",
-                "reference": "e4236727a4d16af42ca3df39ca08c9470a736c0d",
+                "url": "https://api.github.com/repos/amphp/http-server-session/zipball/dac3188c9cb368e635cb8a4e4ff84bf128bb6818",
+                "reference": "dac3188c9cb368e635cb8a4e4ff84bf128bb6818",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^3-dev",
-                "amphp/cache": "^2-dev",
-                "amphp/http": "^1.3",
-                "amphp/http-server": "^3-dev",
+                "amphp/amp": "^3",
+                "amphp/cache": "^2",
+                "amphp/http": "^2",
+                "amphp/http-server": "^3",
                 "amphp/serialization": "^1",
-                "amphp/sync": "^2-dev",
+                "amphp/sync": "^2",
                 "paragonie/constant_time_encoding": "^2.2",
-                "php": ">=8"
+                "php": ">=8.1"
             },
             "conflict": {
                 "amphp/redis": "<2 || >=3"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^2-dev",
-                "amphp/redis": "^2-dev",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "amphp/redis": "^2",
                 "league/uri": "^6",
-                "phpunit/phpunit": "^9"
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5"
             },
             "suggest": {
                 "amphp/redis": "Allows storing session data in Redis"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1015,11 +1034,11 @@
                     "email": "me@kelunik.com"
                 }
             ],
-            "description": "Session management for Amp's HTTP server.",
-            "homepage": "https://github.com/amphp/http-server-session",
+            "description": " An HTTP server plugin that simplifies session management for your applications. Effortlessly handle user sessions, securely managing data across requests.",
+            "homepage": "https://amphp.org/http-server-session",
             "support": {
                 "issues": "https://github.com/amphp/http-server-session/issues",
-                "source": "https://github.com/amphp/http-server-session/tree/v3"
+                "source": "https://github.com/amphp/http-server-session/tree/3.x"
             },
             "funding": [
                 {
@@ -1027,46 +1046,51 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-23T12:01:36+00:00"
+            "time": "2023-12-03T19:13:34+00:00"
         },
         {
             "name": "amphp/http-server-static-content",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-static-content.git",
-                "reference": "55fc1807da34c50315165f8d7533f024515d22fd"
+                "reference": "3e9f57fbb419aa9ecb9c96667b1d91b256f23426"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-static-content/zipball/55fc1807da34c50315165f8d7533f024515d22fd",
-                "reference": "55fc1807da34c50315165f8d7533f024515d22fd",
+                "url": "https://api.github.com/repos/amphp/http-server-static-content/zipball/3e9f57fbb419aa9ecb9c96667b1d91b256f23426",
+                "reference": "3e9f57fbb419aa9ecb9c96667b1d91b256f23426",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^3-dev",
-                "amphp/byte-stream": "^2-dev",
-                "amphp/file": "^3-dev",
-                "amphp/http": "^1.5",
-                "amphp/http-server": "^3-dev",
-                "cash/lrucache": "^1",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/cache": "^2",
+                "amphp/file": "^3",
+                "amphp/http": "^2",
+                "amphp/http-server": "^3",
+                "amphp/pipeline": "^1",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
-                "amphp/http-server-router": "^2-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^2-dev",
-                "danielmiessler/sec-lists": "2019.3",
-                "phpunit/phpunit": "^9"
+                "amphp/http-server-router": "^2",
+                "amphp/log": "^2",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "danielmiessler/sec-lists": "2022.4",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.6"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Http\\Server\\StaticContent\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Http\\Server\\StaticContent\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1089,7 +1113,7 @@
                     "email": "aaron@trowski.com"
                 }
             ],
-            "description": "Static content responder for Amp's HTTP server.",
+            "description": "Static content request handler for Amp's HTTP server.",
             "homepage": "https://github.com/amphp/http-server-static-content",
             "keywords": [
                 "file",
@@ -1099,7 +1123,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server-static-content/issues",
-                "source": "https://github.com/amphp/http-server-static-content/tree/v2"
+                "source": "https://github.com/amphp/http-server-static-content/tree/2.x"
             },
             "funding": [
                 {
@@ -1107,42 +1131,45 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-17T04:51:53+00:00"
+            "time": "2024-01-23T08:29:00+00:00"
         },
         {
             "name": "amphp/log",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/log.git",
-                "reference": "1563202d757ea363d36338a154567462f0e222a3"
+                "reference": "bf1562b8a18a3f30efa069ed740f412ac70a8a6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/log/zipball/1563202d757ea363d36338a154567462f0e222a3",
-                "reference": "1563202d757ea363d36338a154567462f0e222a3",
+                "url": "https://api.github.com/repos/amphp/log/zipball/bf1562b8a18a3f30efa069ed740f412ac70a8a6c",
+                "reference": "bf1562b8a18a3f30efa069ed740f412ac70a8a6c",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/byte-stream": "v2.x-dev",
-                "monolog/monolog": "^2 || ^1.23",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "monolog/monolog": "^3|^2|^1.23",
+                "php": ">=8.1",
+                "psr/log": "^3|^2|^1"
             },
             "require-dev": {
-                "amphp/file": "v3.x-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "phpunit/phpunit": "^9"
+                "amphp/file": "^3",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.6"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Log\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Log\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1158,7 +1185,7 @@
                     "email": "me@kelunik.com"
                 }
             ],
-            "description": "Non-blocking logging for PHP based on Amp and Monolog.",
+            "description": "Non-blocking logging for PHP based on Amp, Revolt, and Monolog.",
             "homepage": "https://github.com/amphp/log",
             "keywords": [
                 "amp",
@@ -1171,7 +1198,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/log/issues",
-                "source": "https://github.com/amphp/log/tree/v2"
+                "source": "https://github.com/amphp/log/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -1179,46 +1206,53 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-16T19:10:15+00:00"
+            "time": "2023-08-05T18:59:54+00:00"
         },
         {
             "name": "amphp/parallel",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/parallel.git",
-                "reference": "746d5321223dcee53277d358b09cf68336a575c9"
+                "reference": "73d293f1fc4df1bebc3c4fce1432e82dd7032238"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parallel/zipball/746d5321223dcee53277d358b09cf68336a575c9",
-                "reference": "746d5321223dcee53277d358b09cf68336a575c9",
+                "url": "https://api.github.com/repos/amphp/parallel/zipball/73d293f1fc4df1bebc3c4fce1432e82dd7032238",
+                "reference": "73d293f1fc4df1bebc3c4fce1432e82dd7032238",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/byte-stream": "v2.x-dev",
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/cache": "^2",
                 "amphp/parser": "^1",
-                "amphp/process": "v2.x-dev",
+                "amphp/pipeline": "^1",
+                "amphp/process": "^2",
                 "amphp/serialization": "^1",
-                "amphp/sync": "v2.x-dev",
-                "php": ">=8"
+                "amphp/socket": "^2",
+                "amphp/sync": "^2",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "phpunit/phpunit": "^9"
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.18"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Parallel\\": "lib"
-                },
                 "files": [
-                    "lib/Context/functions.php",
-                    "lib/Sync/functions.php",
-                    "lib/Worker/functions.php"
-                ]
+                    "src/Context/functions.php",
+                    "src/Context/Internal/functions.php",
+                    "src/Ipc/functions.php",
+                    "src/Worker/functions.php"
+                ],
+                "psr-4": {
+                    "Amp\\Parallel\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1228,6 +1262,10 @@
                 {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 },
                 {
                     "name": "Stephen Coakley",
@@ -1245,7 +1283,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/parallel/issues",
-                "source": "https://github.com/amphp/parallel/tree/v2"
+                "source": "https://github.com/amphp/parallel/tree/v2.2.9"
             },
             "funding": [
                 {
@@ -1253,33 +1291,35 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-06T13:00:44+00:00"
+            "time": "2024-03-24T18:27:44+00:00"
         },
         {
             "name": "amphp/parser",
-            "version": "v1.0.0",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/parser.git",
-                "reference": "f83e68f03d5b8e8e0365b8792985a7f341c57ae1"
+                "reference": "3cf1f8b32a0171d4b1bed93d25617637a77cded7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parser/zipball/f83e68f03d5b8e8e0365b8792985a7f341c57ae1",
-                "reference": "f83e68f03d5b8e8e0365b8792985a7f341c57ae1",
+                "url": "https://api.github.com/repos/amphp/parser/zipball/3cf1f8b32a0171d4b1bed93d25617637a77cded7",
+                "reference": "3cf1f8b32a0171d4b1bed93d25617637a77cded7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7"
+                "php": ">=7.4"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "phpunit/phpunit": "^6"
+                "amphp/php-cs-fixer-config": "^2",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.4"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Amp\\Parser\\": "lib"
+                    "Amp\\Parser\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1288,12 +1328,12 @@
             ],
             "authors": [
                 {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 }
             ],
             "description": "A generator parser to make streaming parsers simple.",
@@ -1306,51 +1346,47 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/parser/issues",
-                "source": "https://github.com/amphp/parser/tree/is-valid"
+                "source": "https://github.com/amphp/parser/tree/v1.1.1"
             },
-            "time": "2017-06-06T05:29:10+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-21T19:16:53+00:00"
         },
         {
             "name": "amphp/pipeline",
-            "version": "dev-master",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/pipeline.git",
-                "reference": "6a84916dc1c530a2fe31dffd5f068fdfc94824fa"
+                "reference": "f1c2ce35d27ae86ead018adb803eccca7421dd9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/pipeline/zipball/6a84916dc1c530a2fe31dffd5f068fdfc94824fa",
-                "reference": "6a84916dc1c530a2fe31dffd5f068fdfc94824fa",
+                "url": "https://api.github.com/repos/amphp/pipeline/zipball/f1c2ce35d27ae86ead018adb803eccca7421dd9b",
+                "reference": "f1c2ce35d27ae86ead018adb803eccca7421dd9b",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/sync": "v2.x-dev",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "jetbrains/phpstorm-stubs": "^2019.3",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "^5.18"
             },
             "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "v1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Amp\\Pipeline\\": "src"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1367,7 +1403,7 @@
                 }
             ],
             "description": "Asynchronous iterators and operators.",
-            "homepage": "http://amphp.org/pipeline",
+            "homepage": "https://amphp.org/pipeline",
             "keywords": [
                 "amp",
                 "amphp",
@@ -1378,7 +1414,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/pipeline/issues",
-                "source": "https://github.com/amphp/pipeline/tree/master"
+                "source": "https://github.com/amphp/pipeline/tree/v1.2.0"
             },
             "funding": [
                 {
@@ -1386,40 +1422,44 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-18T03:21:19+00:00"
+            "time": "2024-03-10T14:48:16+00:00"
         },
         {
             "name": "amphp/process",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/process.git",
-                "reference": "76ba84b8692d72c62fbf430f3a877ebb5d4f18f4"
+                "reference": "52e08c09dec7511d5fbc1fb00d3e4e79fc77d58d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/process/zipball/76ba84b8692d72c62fbf430f3a877ebb5d4f18f4",
-                "reference": "76ba84b8692d72c62fbf430f3a877ebb5d4f18f4",
+                "url": "https://api.github.com/repos/amphp/process/zipball/52e08c09dec7511d5fbc1fb00d3e4e79fc77d58d",
+                "reference": "52e08c09dec7511d5fbc1fb00d3e4e79fc77d58d",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/byte-stream": "v2.x-dev",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/sync": "^2",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1 || ^0.2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "phpunit/phpunit": "^9"
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.4"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Process\\": "lib"
-                },
                 "files": [
-                    "lib/functions.php"
-                ]
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Amp\\Process\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1439,11 +1479,11 @@
                     "email": "me@kelunik.com"
                 }
             ],
-            "description": "Asynchronous process manager.",
-            "homepage": "https://github.com/amphp/process",
+            "description": "A fiber-aware process manager based on Amp and Revolt.",
+            "homepage": "https://amphp.org/process",
             "support": {
                 "issues": "https://github.com/amphp/process/issues",
-                "source": "https://github.com/amphp/process/tree/v2"
+                "source": "https://github.com/amphp/process/tree/v2.0.3"
             },
             "funding": [
                 {
@@ -1451,37 +1491,41 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-04T19:16:50+00:00"
+            "time": "2024-04-19T03:13:44+00:00"
         },
         {
             "name": "amphp/serialization",
-            "version": "v1.0.0",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/serialization.git",
-                "reference": "693e77b2fb0b266c3c7d622317f881de44ae94a1"
+                "reference": "21116dcd1221e0d1817e02a6e2b0c52a9a317327"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/serialization/zipball/693e77b2fb0b266c3c7d622317f881de44ae94a1",
-                "reference": "693e77b2fb0b266c3c7d622317f881de44ae94a1",
+                "url": "https://api.github.com/repos/amphp/serialization/zipball/21116dcd1221e0d1817e02a6e2b0c52a9a317327",
+                "reference": "21116dcd1221e0d1817e02a6e2b0c52a9a317327",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.4"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "phpunit/phpunit": "^9 || ^8 || ^7"
+                "amphp/php-cs-fixer-config": "^2",
+                "ext-json": "*",
+                "ext-zlib": "*",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "5.4"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Serialization\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Serialization\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1507,53 +1551,59 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/serialization/issues",
-                "source": "https://github.com/amphp/serialization/tree/master"
+                "source": "https://github.com/amphp/serialization/tree/1.x"
             },
-            "time": "2020-03-25T21:39:07+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-08-29T20:22:27+00:00"
         },
         {
             "name": "amphp/socket",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "ce4cae7f75d253b7b75ec9674e03d4749d00fa4e"
+                "reference": "58e0422221825b79681b72c50c47a930be7bf1e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/ce4cae7f75d253b7b75ec9674e03d4749d00fa4e",
-                "reference": "ce4cae7f75d253b7b75ec9674e03d4749d00fa4e",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/58e0422221825b79681b72c50c47a930be7bf1e1",
+                "reference": "58e0422221825b79681b72c50c47a930be7bf1e1",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "amphp/byte-stream": "v2.x-dev",
-                "amphp/dns": "v2.x-dev",
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/dns": "^2",
                 "ext-openssl": "*",
                 "kelunik/certificate": "^1.1",
-                "league/uri-parser": "^1.4",
-                "php": ">=8"
+                "league/uri": "^6.5 | ^7",
+                "league/uri-interfaces": "^2.3 | ^7",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1 || ^0.2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "amphp/process": "^2",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "5.20"
             },
+            "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Amp\\Socket\\": "src"
-                },
                 "files": [
                     "src/functions.php",
-                    "src/Internal/functions.php"
-                ]
+                    "src/Internal/functions.php",
+                    "src/SocketAddress/functions.php"
+                ],
+                "psr-4": {
+                    "Amp\\Socket\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1573,7 +1623,7 @@
                     "email": "me@kelunik.com"
                 }
             ],
-            "description": "Async socket connection / server tools for Amp.",
+            "description": "Non-blocking socket connection / server implementations based on Amp and Revolt.",
             "homepage": "https://github.com/amphp/socket",
             "keywords": [
                 "amp",
@@ -1586,7 +1636,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/socket/issues",
-                "source": "https://github.com/amphp/socket/tree/v2"
+                "source": "https://github.com/amphp/socket/tree/v2.3.1"
             },
             "funding": [
                 {
@@ -1594,39 +1644,44 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-20T00:19:09+00:00"
+            "time": "2024-04-21T14:33:03+00:00"
         },
         {
             "name": "amphp/sync",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sync.git",
-                "reference": "76226f666ff540b305aa5631e1623ea72b6389b9"
+                "reference": "375ef5b54a0d12c38e12728dde05a55e30f2fbec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sync/zipball/76226f666ff540b305aa5631e1623ea72b6389b9",
-                "reference": "76226f666ff540b305aa5631e1623ea72b6389b9",
+                "url": "https://api.github.com/repos/amphp/sync/zipball/375ef5b54a0d12c38e12728dde05a55e30f2fbec",
+                "reference": "375ef5b54a0d12c38e12728dde05a55e30f2fbec",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "v3.x-dev",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/pipeline": "^1",
+                "amphp/serialization": "^1",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1 || ^0.2"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "v2.x-dev",
-                "phpunit/phpunit": "^9"
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "5.23"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Sync\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Sync\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1638,11 +1693,15 @@
                     "email": "aaron@trowski.com"
                 },
                 {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
                     "name": "Stephen Coakley",
                     "email": "me@stephencoakley.com"
                 }
             ],
-            "description": "Mutex, Semaphore, and other synchronization tools for Amp.",
+            "description": "Non-blocking synchronization primitives for PHP based on Amp and Revolt.",
             "homepage": "https://github.com/amphp/sync",
             "keywords": [
                 "async",
@@ -1653,7 +1712,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sync/issues",
-                "source": "https://github.com/amphp/sync/tree/v2"
+                "source": "https://github.com/amphp/sync/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -1661,46 +1720,49 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-18T03:10:22+00:00"
+            "time": "2024-03-12T01:00:01+00:00"
         },
         {
             "name": "amphp/websocket",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "664118feeaa473c821168c4b59334ab8c9015e8d"
+                "reference": "1dc9d2c3b9b10965510d2762181254d825098419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/664118feeaa473c821168c4b59334ab8c9015e8d",
-                "reference": "664118feeaa473c821168c4b59334ab8c9015e8d",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/1dc9d2c3b9b10965510d2762181254d825098419",
+                "reference": "1dc9d2c3b9b10965510d2762181254d825098419",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^3-dev",
-                "amphp/byte-stream": "^2-dev",
-                "amphp/socket": "^2-dev",
-                "cash/lrucache": "^1",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/parser": "^1",
+                "amphp/pipeline": "^1",
+                "amphp/socket": "^2",
+                "php": ">=8.1",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^2-dev",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.10"
+                "psalm/phar": "^5.18"
             },
             "suggest": {
                 "ext-zlib": "Required for compression"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Amp\\Websocket\\": "src"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Amp\\Websocket\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1732,7 +1794,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket/issues",
-                "source": "https://github.com/amphp/websocket/tree/v2"
+                "source": "https://github.com/amphp/websocket/tree/v2.0.3"
             },
             "funding": [
                 {
@@ -1740,45 +1802,50 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-28T00:33:31+00:00"
+            "time": "2023-12-28T23:16:28+00:00"
         },
         {
             "name": "amphp/websocket-server",
-            "version": "v3.x-dev",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-server.git",
-                "reference": "95b09b9e367f25a57b715dd2db0a1558d7521188"
+                "reference": "904902cc0e60950e10b4fb7fa3cb054f5e0c0b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/95b09b9e367f25a57b715dd2db0a1558d7521188",
-                "reference": "95b09b9e367f25a57b715dd2db0a1558d7521188",
+                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/904902cc0e60950e10b4fb7fa3cb054f5e0c0b6a",
+                "reference": "904902cc0e60950e10b4fb7fa3cb054f5e0c0b6a",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^3-dev",
-                "amphp/byte-stream": "^2-dev",
-                "amphp/http": "^1.3",
-                "amphp/http-server": "^3-dev",
-                "amphp/socket": "^2-dev",
-                "amphp/websocket": "^2-dev",
-                "php": ">=8"
+                "amphp/amp": "^3",
+                "amphp/byte-stream": "^2",
+                "amphp/http": "^2",
+                "amphp/http-server": "^3",
+                "amphp/socket": "^2",
+                "amphp/websocket": "^2",
+                "php": ">=8.1",
+                "psr/log": "^1|^2|^3",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
                 "amphp/http-client": "^5-dev",
-                "amphp/http-server-router": "^2-dev",
-                "amphp/http-server-static-content": "^2-dev",
-                "amphp/log": "^2-dev",
-                "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^2-dev",
+                "amphp/http-server-router": "^2",
+                "amphp/http-server-static-content": "^2",
+                "amphp/log": "^2",
+                "amphp/php-cs-fixer-config": "^2",
+                "amphp/phpunit-util": "^3",
+                "amphp/websocket-client": "^2-dev",
+                "colinodell/psr-testlogger": "^1.2",
                 "league/climate": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.10"
+                "psalm/phar": "^5.4"
             },
             "suggest": {
                 "ext-zlib": "Required for compression"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1815,7 +1882,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket-server/issues",
-                "source": "https://github.com/amphp/websocket-server/tree/v3"
+                "source": "https://github.com/amphp/websocket-server/tree/v3.0.1"
             },
             "funding": [
                 {
@@ -1823,34 +1890,36 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-23T00:25:40+00:00"
+            "time": "2023-10-21T17:10:20+00:00"
         },
         {
             "name": "amphp/windows-registry",
-            "version": "v1.x-dev",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/windows-registry.git",
-                "reference": "5e685b0e4b0b934c40d0cec7d281467499429cc2"
+                "reference": "0d569e8f256cca974e3842b6e78b4e434bf98306"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/windows-registry/zipball/5e685b0e4b0b934c40d0cec7d281467499429cc2",
-                "reference": "5e685b0e4b0b934c40d0cec7d281467499429cc2",
+                "url": "https://api.github.com/repos/amphp/windows-registry/zipball/0d569e8f256cca974e3842b6e78b4e434bf98306",
+                "reference": "0d569e8f256cca974e3842b6e78b4e434bf98306",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^3-dev",
-                "amphp/byte-stream": "^2-dev",
-                "amphp/process": "^2-dev"
+                "amphp/byte-stream": "^2",
+                "amphp/process": "^2",
+                "php": ">=8.1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master"
+                "amphp/php-cs-fixer-config": "^2",
+                "psalm/phar": "^5.4"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Amp\\WindowsRegistry\\": "lib"
+                    "Amp\\WindowsRegistry\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1866,7 +1935,7 @@
             "description": "Windows Registry Reader.",
             "support": {
                 "issues": "https://github.com/amphp/windows-registry/issues",
-                "source": "https://github.com/amphp/windows-registry/tree/v1"
+                "source": "https://github.com/amphp/windows-registry/tree/v1.0.1"
             },
             "funding": [
                 {
@@ -1874,52 +1943,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-08T17:54:09+00:00"
-        },
-        {
-            "name": "cash/lrucache",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cash/LRUCache.git",
-                "reference": "4fa4c6834cec59690b43526c4da41d6153026289"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cash/LRUCache/zipball/4fa4c6834cec59690b43526c4da41d6153026289",
-                "reference": "4fa4c6834cec59690b43526c4da41d6153026289",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "cash": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cash Costello",
-                    "email": "cash.costello@gmail.com"
-                }
-            ],
-            "description": "An efficient memory-based Least Recently Used (LRU) cache",
-            "homepage": "https://github.com/cash/LRUCache",
-            "keywords": [
-                "cache",
-                "lru"
-            ],
-            "support": {
-                "issues": "https://github.com/cash/LRUCache/issues",
-                "source": "https://github.com/cash/LRUCache/tree/1.0.0"
-            },
-            "time": "2013-09-20T18:59:12+00:00"
+            "time": "2024-01-30T23:01:51+00:00"
         },
         {
             "name": "daverandom/libdns",
@@ -1927,29 +1951,29 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DaveRandom/LibDNS.git",
-                "reference": "e8b6d6593d18ac3a6a14666d8a68a4703b2e05f9"
+                "reference": "b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DaveRandom/LibDNS/zipball/e8b6d6593d18ac3a6a14666d8a68a4703b2e05f9",
-                "reference": "e8b6d6593d18ac3a6a14666d8a68a4703b2e05f9",
+                "url": "https://api.github.com/repos/DaveRandom/LibDNS/zipball/b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a",
+                "reference": "b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
-                "php": ">=7.0"
+                "php": ">=7.1"
             },
             "suggest": {
                 "ext-intl": "Required for IDN support"
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "LibDNS\\": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "LibDNS\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1963,27 +1987,27 @@
                 "issues": "https://github.com/DaveRandom/LibDNS/issues",
                 "source": "https://github.com/DaveRandom/LibDNS/tree/2.x"
             },
-            "time": "2019-12-03T09:12:46+00:00"
+            "time": "2024-04-12T12:12:48+00:00"
         },
         {
             "name": "google/protobuf",
-            "version": "v3.19.1",
+            "version": "v3.25.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "83fe8edf7469ffdd83cb4b4e62249c154f961b9b"
+                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/83fe8edf7469ffdd83cb4b4e62249c154f961b9b",
-                "reference": "83fe8edf7469ffdd83cb4b4e62249c154f961b9b",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/983a87f4f8798a90ca3a25b0f300b8fda38df643",
+                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=7.0.0"
             },
             "require-dev": {
-                "phpunit/phpunit": ">=4.8.0"
+                "phpunit/phpunit": ">=5.0.0"
             },
             "suggest": {
                 "ext-bcmath": "Need to support JSON deserialization"
@@ -2005,10 +2029,9 @@
                 "proto"
             ],
             "support": {
-                "issues": "https://github.com/protocolbuffers/protobuf-php/issues",
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.19.1"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.25.3"
             },
-            "time": "2021-10-29T00:36:13+00:00"
+            "time": "2024-02-15T21:11:49+00:00"
         },
         {
             "name": "kelunik/certificate",
@@ -2016,12 +2039,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kelunik/certificate.git",
-                "reference": "47dcc659fe73ae040ae17d068a4fc8777813f0fb"
+                "reference": "7e00d498c264d5eb4f78c69f41c8bd6719c0199e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kelunik/certificate/zipball/47dcc659fe73ae040ae17d068a4fc8777813f0fb",
-                "reference": "47dcc659fe73ae040ae17d068a4fc8777813f0fb",
+                "url": "https://api.github.com/repos/kelunik/certificate/zipball/7e00d498c264d5eb4f78c69f41c8bd6719c0199e",
+                "reference": "7e00d498c264d5eb4f78c69f41c8bd6719c0199e",
                 "shasum": ""
             },
             "require": {
@@ -2029,8 +2052,8 @@
                 "php": ">=7.0"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "phpunit/phpunit": "^6 | 7"
+                "amphp/php-cs-fixer-config": "^2",
+                "phpunit/phpunit": "^6 | 7 | ^8 | ^9"
             },
             "default-branch": true,
             "type": "library",
@@ -2041,7 +2064,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kelunik\\Certificate\\": "lib"
+                    "Kelunik\\Certificate\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2065,33 +2088,33 @@
             ],
             "support": {
                 "issues": "https://github.com/kelunik/certificate/issues",
-                "source": "https://github.com/kelunik/certificate/tree/master"
+                "source": "https://github.com/kelunik/certificate/tree/v1.1.3"
             },
-            "time": "2020-01-29T20:07:08+00:00"
+            "time": "2023-02-03T21:26:53+00:00"
         },
         {
             "name": "league/climate",
-            "version": "3.7.0",
+            "version": "3.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/climate.git",
-                "reference": "5c717c3032c5118be7ad2395dbe0813d9894e8c7"
+                "reference": "a785a3ac8f584eed4abd45e4e16fe64c46659a28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/climate/zipball/5c717c3032c5118be7ad2395dbe0813d9894e8c7",
-                "reference": "5c717c3032c5118be7ad2395dbe0813d9894e8c7",
+                "url": "https://api.github.com/repos/thephpleague/climate/zipball/a785a3ac8f584eed4abd45e4e16fe64c46659a28",
+                "reference": "a785a3ac8f584eed4abd45e4e16fe64c46659a28",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.3 || ^8.0",
-                "psr/log": "^1.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
                 "seld/cli-prompt": "^1.0"
             },
             "require-dev": {
-                "mikey179/vfsstream": "^1.4",
+                "mikey179/vfsstream": "^1.6.10",
                 "mockery/mockery": "^1.4.2",
-                "phpunit/phpunit": "^9.5.0"
+                "phpunit/phpunit": "^9.5.10"
             },
             "suggest": {
                 "ext-mbstring": "If ext-mbstring is not available you MUST install symfony/polyfill-mbstring"
@@ -2130,9 +2153,9 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/climate/issues",
-                "source": "https://github.com/thephpleague/climate/tree/3.7.0"
+                "source": "https://github.com/thephpleague/climate/tree/3.8.2"
             },
-            "time": "2021-01-10T20:18:52+00:00"
+            "time": "2022-06-18T14:42:08+00:00"
         },
         {
             "name": "league/uri",
@@ -2140,47 +2163,41 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri.git",
-                "reference": "4a3f0209da5c1956849275f46d07c1a8b6c83e8f"
+                "reference": "7a14542bc134fb5e5ae02be23deffb7503634344"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/4a3f0209da5c1956849275f46d07c1a8b6c83e8f",
-                "reference": "4a3f0209da5c1956849275f46d07c1a8b6c83e8f",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/7a14542bc134fb5e5ae02be23deffb7503634344",
+                "reference": "7a14542bc134fb5e5ae02be23deffb7503634344",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "league/uri-interfaces": "^2.3",
-                "php": "^7.3 || ^8.0",
-                "psr/http-message": "^1.0"
+                "league/uri-interfaces": "^7.3",
+                "php": "^8.1"
             },
             "conflict": {
                 "league/uri-schemes": "^1.0"
             },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.19 || ^3.0",
-                "phpstan/phpstan": "^0.12.90",
-                "phpstan/phpstan-phpunit": "^0.12.22",
-                "phpstan/phpstan-strict-rules": "^0.12.11",
-                "phpunit/phpunit": "^8.0 || ^9.0",
-                "psr/http-factory": "^1.0"
-            },
             "suggest": {
-                "ext-fileinfo": "Needed to create Data URI from a filepath",
-                "ext-intl": "Needed to improve host validation",
-                "league/uri-components": "Needed to easily manipulate URI objects",
-                "psr/http-factory": "Needed to use the URI factory"
+                "ext-bcmath": "to improve IPV4 host parsing",
+                "ext-fileinfo": "to create Data URI from file contennts",
+                "ext-gmp": "to improve IPV4 host parsing",
+                "ext-intl": "to handle IDN host with the best performance",
+                "jeremykendall/php-domain-parser": "to resolve Public Suffix and Top Level Domain",
+                "league/uri-components": "Needed to easily manipulate URI objects components",
+                "php-64bit": "to improve IPV4 host parsing",
+                "symfony/polyfill-intl-idn": "to handle IDN host via the Symfony polyfill if ext-intl is not present"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.x-dev"
+                    "dev-master": "7.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "League\\Uri\\": "src"
+                    "League\\Uri\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2195,7 +2212,7 @@
                 }
             ],
             "description": "URI manipulation library",
-            "homepage": "http://uri.thephpleague.com",
+            "homepage": "https://uri.thephpleague.com",
             "keywords": [
                 "data-uri",
                 "file-uri",
@@ -2220,7 +2237,7 @@
             "support": {
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
-                "issues": "https://github.com/thephpleague/uri/issues",
+                "issues": "https://github.com/thephpleague/uri-src/issues",
                 "source": "https://github.com/thephpleague/uri/tree/master"
             },
             "funding": [
@@ -2229,47 +2246,46 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-02T11:43:42+00:00"
+            "time": "2024-04-12T08:09:23+00:00"
         },
         {
-            "name": "league/uri-interfaces",
+            "name": "league/uri-components",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/thephpleague/uri-interfaces.git",
-                "reference": "a8d5dcc768d29905bcc76a2f46ba443029f163d6"
+                "url": "https://github.com/thephpleague/uri-components.git",
+                "reference": "f91515dcedb38849c350961d038db5cfe71baac6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/a8d5dcc768d29905bcc76a2f46ba443029f163d6",
-                "reference": "a8d5dcc768d29905bcc76a2f46ba443029f163d6",
+                "url": "https://api.github.com/repos/thephpleague/uri-components/zipball/f91515dcedb38849c350961d038db5cfe71baac6",
+                "reference": "f91515dcedb38849c350961d038db5cfe71baac6",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "php": "^7.2 || ^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.19",
-                "phpstan/phpstan": "^0.12.90",
-                "phpstan/phpstan-phpunit": "^0.12.19",
-                "phpstan/phpstan-strict-rules": "^0.12.9",
-                "phpunit/phpunit": "^8.5.15 || ^9.5"
+                "league/uri": "^7.3",
+                "php": "^8.1"
             },
             "suggest": {
-                "ext-intl": "to use the IDNA feature",
-                "symfony/polyfill-intl-idn": "to use the IDNA feature via Symfony Polyfill"
+                "ext-bcmath": "to improve IPV4 host parsing",
+                "ext-fileinfo": "to create Data URI from file contennts",
+                "ext-gmp": "to improve IPV4 host parsing",
+                "ext-intl": "to handle IDN host with the best performance",
+                "ext-mbstring": "to use the sorting algorithm of URLSearchParams",
+                "jeremykendall/php-domain-parser": "to resolve Public Suffix and Top Level Domain",
+                "php-64bit": "to improve IPV4 host parsing",
+                "symfony/polyfill-intl-idn": "to handle IDN host via the Symfony polyfill if ext-intl is not present"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "7.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "League\\Uri\\": "src/"
+                    "League\\Uri\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2283,16 +2299,113 @@
                     "homepage": "https://nyamsprod.com"
                 }
             ],
-            "description": "Common interface for URI representation",
-            "homepage": "http://github.com/thephpleague/uri-interfaces",
+            "description": "URI components manipulation library",
+            "homepage": "http://uri.thephpleague.com",
             "keywords": [
+                "authority",
+                "components",
+                "fragment",
+                "host",
+                "middleware",
+                "modifier",
+                "path",
+                "port",
+                "query",
                 "rfc3986",
-                "rfc3987",
+                "scheme",
                 "uri",
-                "url"
+                "url",
+                "userinfo"
             ],
             "support": {
-                "issues": "https://github.com/thephpleague/uri-interfaces/issues",
+                "docs": "https://uri.thephpleague.com",
+                "forum": "https://thephpleague.slack.com",
+                "issues": "https://github.com/thephpleague/uri-src/issues",
+                "source": "https://github.com/thephpleague/uri-components/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/nyamsprod",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-12T08:09:23+00:00"
+        },
+        {
+            "name": "league/uri-interfaces",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/uri-interfaces.git",
+                "reference": "71df26cb1f81872e4723560e93812b375270a74a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/71df26cb1f81872e4723560e93812b375270a74a",
+                "reference": "71df26cb1f81872e4723560e93812b375270a74a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-filter": "*",
+                "php": "^8.1",
+                "psr/http-factory": "^1",
+                "psr/http-message": "^1.1 || ^2.0"
+            },
+            "suggest": {
+                "ext-bcmath": "to improve IPV4 host parsing",
+                "ext-gmp": "to improve IPV4 host parsing",
+                "ext-intl": "to handle IDN host with the best performance",
+                "php-64bit": "to improve IPV4 host parsing",
+                "symfony/polyfill-intl-idn": "to handle IDN host via the Symfony polyfill if ext-intl is not present"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Uri\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://nyamsprod.com"
+                }
+            ],
+            "description": "Common interfaces and classes for URI representation and interaction",
+            "homepage": "https://uri.thephpleague.com",
+            "keywords": [
+                "data-uri",
+                "file-uri",
+                "ftp",
+                "hostname",
+                "http",
+                "https",
+                "parse_str",
+                "parse_url",
+                "psr-7",
+                "query-string",
+                "querystring",
+                "rfc3986",
+                "rfc3987",
+                "rfc6570",
+                "uri",
+                "url",
+                "ws"
+            ],
+            "support": {
+                "docs": "https://uri.thephpleague.com",
+                "forum": "https://thephpleague.slack.com",
+                "issues": "https://github.com/thephpleague/uri-src/issues",
                 "source": "https://github.com/thephpleague/uri-interfaces/tree/master"
             },
             "funding": [
@@ -2301,90 +2414,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-02T11:42:15+00:00"
-        },
-        {
-            "name": "league/uri-parser",
-            "version": "1.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/uri-parser.git",
-                "reference": "e6eb42f951433aa3106639b6592f1ef9f8a36d40"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-parser/zipball/e6eb42f951433aa3106639b6592f1ef9f8a36d40",
-                "reference": "e6eb42f951433aa3106639b6592f1ef9f8a36d40",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.0",
-                "phpstan/phpstan": "^0.9.2",
-                "phpstan/phpstan-phpunit": "^0.9.4",
-                "phpstan/phpstan-strict-rules": "^0.9.0",
-                "phpunit/phpunit": "^6.0"
-            },
-            "suggest": {
-                "ext-intl": "Allow parsing RFC3987 compliant hosts",
-                "league/uri-schemes": "Allow validating and normalizing URI parsing results"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\Uri\\": "src"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ignace Nyamagana Butera",
-                    "email": "nyamsprod@gmail.com",
-                    "homepage": "https://nyamsprod.com"
-                }
-            ],
-            "description": "userland URI parser RFC 3986 compliant",
-            "homepage": "https://github.com/thephpleague/uri-parser",
-            "keywords": [
-                "parse_url",
-                "parser",
-                "rfc3986",
-                "rfc3987",
-                "uri",
-                "url"
-            ],
-            "support": {
-                "issues": "https://github.com/thephpleague/uri-parser/issues",
-                "source": "https://github.com/thephpleague/uri-parser/tree/1.x"
-            },
-            "time": "2021-05-16T05:25:00+00:00"
+            "time": "2024-04-12T08:09:23+00:00"
         },
         {
             "name": "monolog/monolog",
-            "version": "dev-main",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "f19a2ae873d42f4494f3fb29de9dadb91a3f7601"
+                "reference": "884aa47a055ea3e8e351ceaf4dfc67f52fff44c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f19a2ae873d42f4494f3fb29de9dadb91a3f7601",
-                "reference": "f19a2ae873d42f4494f3fb29de9dadb91a3f7601",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/884aa47a055ea3e8e351ceaf4dfc67f52fff44c0",
+                "reference": "884aa47a055ea3e8e351ceaf4dfc67f52fff44c0",
                 "shasum": ""
             },
             "require": {
@@ -2397,18 +2440,22 @@
             "require-dev": {
                 "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
-                "elasticsearch/elasticsearch": "^7",
-                "graylog2/gelf-php": "^1.4.2",
+                "elasticsearch/elasticsearch": "^7 || ^8",
+                "ext-json": "*",
+                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
+                "guzzlehttp/guzzle": "^7.4",
+                "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
-                "php-console/php-console": "^3.1.3",
-                "phpspec/prophecy": "^1.6.1",
-                "phpstan/phpstan": "^0.12.91",
-                "phpunit/phpunit": "^8.5",
-                "predis/predis": "^1.1",
-                "rollbar/rollbar": "^1.3",
-                "ruflin/elastica": ">=0.90@dev",
-                "swiftmailer/swiftmailer": "^5.3|^6.0"
+                "phpspec/prophecy": "^1.15",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^8.5.38 || ^9.6.19",
+                "predis/predis": "^1.1 || ^2.0",
+                "rollbar/rollbar": "^1.3 || ^2 || ^3",
+                "ruflin/elastica": "^7",
+                "swiftmailer/swiftmailer": "^5.3|^6.0",
+                "symfony/mailer": "^5.4 || ^6",
+                "symfony/mime": "^5.4 || ^6"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -2423,11 +2470,9 @@
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
-                "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2459,7 +2504,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/main"
+                "source": "https://github.com/Seldaek/monolog/tree/2.x"
             },
             "funding": [
                 {
@@ -2471,7 +2516,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-10-18T21:44:22+00:00"
+            "time": "2024-04-15T08:56:50+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -2495,12 +2540,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "FastRoute\\": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "FastRoute\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2525,16 +2570,16 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v2.4.0",
+            "version": "v2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c"
+                "reference": "52a0d99e69f56b9ec27ace92ba56897fe6993105"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
-                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/52a0d99e69f56b9ec27ace92ba56897fe6993105",
+                "reference": "52a0d99e69f56b9ec27ace92ba56897fe6993105",
                 "shasum": ""
             },
             "require": {
@@ -2588,26 +2633,26 @@
                 "issues": "https://github.com/paragonie/constant_time_encoding/issues",
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
-            "time": "2020-12-06T15:14:20+00:00"
+            "time": "2024-05-08T12:18:48+00:00"
         },
         {
-            "name": "psr/http-message",
-            "version": "dev-master",
+            "name": "psr/http-factory",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/http-message.git",
-                "reference": "efd67d1dc14a7ef4fc4e518e7dee91c271d524e4"
+                "url": "https://github.com/php-fig/http-factory.git",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/efd67d1dc14a7ef4fc4e518e7dee91c271d524e4",
-                "reference": "efd67d1dc14a7ef4fc4e518e7dee91c271d524e4",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.1",
+                "psr/http-message": "^1.0 || ^2.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2626,7 +2671,62 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "psr",
+                "psr-17",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/http-factory"
+            },
+            "time": "2024-04-15T12:06:14+00:00"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -2640,36 +2740,37 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/master"
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
-            "time": "2019-08-29T13:16:46+00:00"
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/log",
-            "version": "1.1.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
+                    "Psr\\Log\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2690,9 +2791,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
+                "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
-            "time": "2021-05-03T11:20:27+00:00"
+            "time": "2021-07-14T16:46:02+00:00"
         },
         {
             "name": "rdlowrey/auryn",
@@ -2765,22 +2866,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "70e67dc797a259e1df2bd1130c1105de3cb8d0b8"
+                "reference": "358572ca31647df7dbe930f13c8567136beffa33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/70e67dc797a259e1df2bd1130c1105de3cb8d0b8",
-                "reference": "70e67dc797a259e1df2bd1130c1105de3cb8d0b8",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/358572ca31647df7dbe930f13c8567136beffa33",
+                "reference": "358572ca31647df7dbe930f13c8567136beffa33",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8"
+                "php": ">=8.1"
             },
             "require-dev": {
                 "ext-json": "*",
                 "jetbrains/phpstorm-stubs": "^2019.3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "^5.15"
             },
             "default-branch": true,
             "type": "library",
@@ -2830,7 +2931,7 @@
                 "issues": "https://github.com/revoltphp/event-loop/issues",
                 "source": "https://github.com/revoltphp/event-loop/tree/main"
             },
-            "time": "2021-11-06T05:11:40+00:00"
+            "time": "2024-03-19T22:02:25+00:00"
         },
         {
             "name": "seld/cli-prompt",
@@ -2937,16 +3038,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "amphp/http-server": 20,
-        "amphp/log": 20,
-        "amphp/socket": 20,
-        "amphp/websocket-server": 20,
-        "amphp/dbus": 20,
-        "amphp/http-server-router": 20,
-        "amphp/http-server-static-content": 20,
-        "amphp/http-server-form-parser": 20,
-        "amphp/http-server-session": 20,
-        "amphp/cluster": 20
+        "amphp/dbus": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
@@ -2955,5 +3047,5 @@
         "ext-sqlite3": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

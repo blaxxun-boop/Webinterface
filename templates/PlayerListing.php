@@ -2,8 +2,16 @@
 /**
  * @var \ValheimServerUI\Proto\PlayerList $table
  * @var string[] $stats
+ * @var bool $canManage
  */
-$availableStats = [];
+
+if (!function_exists("formatStat")) {
+	function formatStat($stat) {
+		return preg_replace("((?|([a-z])(?=[A-Z])|([a-zA-Z])(?=[0-9])|([0-9])(?=[a-zA-Z])))", "$1 ", $stat);
+	}
+}
+
+$availableStats = ["Position"];
 if ($table->getPlayerList()->count()) {
 	foreach ($table->getPlayerList()[0]->getStatistics()->getStats() as $stat => $_) {
 		$availableStats[] = $stat;
@@ -16,23 +24,24 @@ if ($table->getPlayerList()->count()) {
 
 <div id="main" role="main">
     <div class="page-main">
-		<form action="./players/stat/add" style="float: right;" method="post">
-			<label>
-				Add Stat column:
-				<select name="stat">
-					<?php foreach ($availableStats as $stat) echo "<option>$stat</option>"; ?>
-				</select>
-			</label>
-			<input type="submit" />
-		</div>
+        <?php if ($canManage): ?>
+			<form action="./players/stat/add" style="float: right;" method="post">
+				<label>
+					Add Stat column:
+					<select name="stat">
+						<?php foreach (array_diff($availableStats, $stats) as $stat) echo "<option value='$stat'>", formatStat($stat), "</option>"; ?>
+					</select>
+				</label>
+				<input type="submit" />
+			</div>
+        <?php endif; ?>
         <table class="fancyTable sortable">
             <thead>
 				<tr>
 					<th class="textLeft">ID</th>
 					<th class="textLeft">Name</th>
-					<th class="textRight">Position</th>
 					<?php foreach ($stats as $stat): ?>
-					<th class="textRight"><?=htmlspecialchars($stat)?><form style="display: inline;" action="./players/stat/remove" method="post"><button type="submit" name="stat" value="<?=htmlspecialchars($stat)?>" title="Remove" class="decent-remove-button">X</button></form></th>
+					<th class="textRight"><?=htmlspecialchars(formatStat($stat)); if ($canManage): ?><form style="display: inline;" action="./players/stat/remove" method="post"><button type="submit" name="stat" value="<?=htmlspecialchars($stat)?>" title="Remove" class="decent-remove-button">X</button></form><?php endif; ?></th>
 					<?php endforeach; ?>
 					<th class="textRight">Last online</th>
 				</tr>
@@ -42,12 +51,11 @@ if ($table->getPlayerList()->count()) {
 					<?php
 					echo "<tr>
 					<td>{$player->getId()}</td>
-					<td>{$player->getName()}</td>
-					<td class='textRight'>", round($player->getPosition()->getX()), ", ", round($player->getPosition()->getY()), ", " , round($player->getPosition()->getZ()), "</td>";
+					<td>{$player->getName()}</td>";
 					$playerStats = $player->getStatistics()->getStats();
 					foreach ($stats as $stat)
 					{
-						echo "<td class='textRight'>", $playerStats[$stat] ?? 0, "</td>";
+						echo "<td class='textRight'>", $stat === "Position" ? round($player->getPosition()->getX()) . ", " . round($player->getPosition()->getY()) . ", " . round($player->getPosition()->getZ()) : ($playerStats[$stat] ?? 0), "</td>";
 					}
 					if ($player->getStatistics()->getLastTouch() == 0)
 					{

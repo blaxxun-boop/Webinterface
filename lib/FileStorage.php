@@ -8,7 +8,7 @@ use Amp\Serialization\NativeSerializer;
 use Amp\Serialization\Serializer;
 use Revolt\EventLoop;
 
-final class FileStorage implements Storage
+final class FileStorage implements SessionStorage
 {
     public const DEFAULT_SESSION_LIFETIME = 3600;
     public const DEFAULT_SESSION_CLEANING_CYCLE = 1800;

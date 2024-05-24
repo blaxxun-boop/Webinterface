@@ -5,8 +5,6 @@ namespace ValheimServerUI\Responder;
 use Amp\Http\Server\Request;
 use ValheimServerUI\Permission;
 use ValheimServerUI\PermissionSet;
-use ValheimServerUI\Proto\ModList;
-use ValheimServerUI\ServerState;
 use ValheimServerUI\Tpl;
 use ValheimServerUI\ValheimSocket;
 

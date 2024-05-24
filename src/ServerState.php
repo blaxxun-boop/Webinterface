@@ -2,7 +2,7 @@
 
 namespace ValheimServerUI;
 
-use Amp\Deferred;
+use Amp\DeferredFuture;
 use Amp\Future;
 use ValheimServerUI\Proto\Maintenance;
 use ValheimServerUI\Proto\ServerConfig;
@@ -14,7 +14,7 @@ class ServerState {
 	public array $players = [];
 	public ServerConfig $serverConfig;
 	public Maintenance $maintenance;
-	public ?Deferred $waitingForMaintenance = null;
+	public ?DeferredFuture $waitingForMaintenance = null;
 
 	public bool $ready = false;
 	public Future $readyFuture;

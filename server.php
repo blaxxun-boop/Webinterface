@@ -2,22 +2,21 @@
 
 namespace ValheimServerUI;
 
-use Amp\ByteStream\ResourceOutputStream;
-use Amp\CancellationTokenSource;
+use Amp\DeferredCancellation;
 use Amp\File\Sync\AsyncFileKeyedMutex;
+use Amp\Http\HttpStatus;
 use Amp\Http\Server\ErrorHandler;
-use Amp\Http\Server\HttpServer;
 use Amp\Http\Server\Middleware;
 use Amp\Http\Server\Request;
-use Amp\Http\Server\RequestHandler\CallableRequestHandler;
+use Amp\Http\Server\RequestHandler\ClosureRequestHandler;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
-use Amp\Http\Server\Session\Driver;
 use Amp\Http\Server\Session\FileStorage;
 use Amp\Http\Server\Session\Session;
+use Amp\Http\Server\Session\SessionFactory;
 use Amp\Http\Server\Session\SessionMiddleware;
+use Amp\Http\Server\SocketHttpServer;
 use Amp\Http\Server\StaticContent\DocumentRoot;
-use Amp\Http\Status;
 use Amp\Log\ConsoleFormatter;
 use Amp\Log\StreamHandler;
 use Amp\Serialization\NativeSerializer;
@@ -27,7 +26,7 @@ use League\CLImate\CLImate;
 use Monolog\Logger;
 use Psr\Log\LogLevel;
 use ValheimServerUI\Proto\ServerConfig;
-use function Amp\coroutine;
+use function Amp\ByteStream\getStdout;
 
 if (is_dir(__DIR__ . "/proto-out")) {
 	include __DIR__ . "/protoc/protoc-regen.php";
@@ -109,7 +108,7 @@ if ($args->get("help")) {
 	exit(0);
 }
 
-$logHandler = new StreamHandler(new ResourceOutputStream(\STDOUT));
+$logHandler = new StreamHandler(getStdout());
 $formatter = new ConsoleFormatter;
 $formatter->includeStacktraces();
 $logHandler->setFormatter($formatter);
@@ -158,11 +157,11 @@ $connectionInit = function () use (&$serverManager, $serverState, $valheimSocket
 	}
 };
 
-$serverState->connectionLossWatchers[] = fn() => coroutine($connectionInit);
+$serverState->connectionLossWatchers[] = fn() => \Amp\async($connectionInit);
 
 if ($neededDefaults > 0) {
-	$cancelSignal = new CancellationTokenSource;
-	if (\Amp\Future\any([coroutine(fn() => \Amp\trapSignal([\SIGINT, \SIGTERM], true, $cancelSignal->getToken())), $serverState->readyFuture]) !== null) {
+	$cancelSignal = new DeferredCancellation;
+	if (\Amp\Future\awaitAny([\Amp\async(fn() => \Amp\trapSignal([\SIGINT, \SIGTERM], true, $cancelSignal->getCancellation())), $serverState->readyFuture]) !== null) {
 		exit;
 	}
 	$cancelSignal->cancel();
@@ -180,7 +179,6 @@ if ($args->get("certificate") != "") {
 }
 
 $listenAddresses = $args->defined("listen") ? $args->getArray("listen") : ["0.0.0.0:" . $args->get("port"), "[::]:" . $args->get("port")];
-$servers = array_map(fn($s) => Socket\Server::listen($s, $serverContext), $listenAddresses);
 
 $basePath = $args->get("baseurl");
 if ($basePath != "" && $basePath[0] != "/") {
@@ -211,7 +209,7 @@ function requestCallable(callable $callable, ?Permission $permission = null) {
 		$session->read();
 
 		if (!$permissions = PermissionSet::read($db, $session->get("user_id"), $routePermissionMap)) {
-			$session->open();
+			$session->lock();
 			$session->destroy();
 
 			$permissions = PermissionSet::read($db, null, $routePermissionMap);
@@ -225,7 +223,7 @@ function requestCallable(callable $callable, ?Permission $permission = null) {
 			$tpl->load(__DIR__ . "/templates/ErrorPage.php");
 			$tpl->set("title", "403 Forbidden");
 			$tpl->set("message", "This operation is not permitted.");
-			return $tpl->render(Status::FORBIDDEN);
+			return $tpl->render(HttpStatus::FORBIDDEN);
 		}
 
 		try {
@@ -237,13 +235,30 @@ function requestCallable(callable $callable, ?Permission $permission = null) {
 			return $response;
 		} catch (ValheimSocketUnreachableException) {
 			$tpl->load(__DIR__ . "/templates/ErrorUnreachable.php");
-			return $tpl->render(Status::INTERNAL_SERVER_ERROR);
+			return $tpl->render(HttpStatus::INTERNAL_SERVER_ERROR);
 		}
 	};
 }
 
-$router = new Router;
-$router->setFallback(new DocumentRoot(__DIR__ . "/public"));
+$sessions = new SessionMiddleware(new SessionFactory(new AsyncFileKeyedMutex(__DIR__ . "/sessions/%s.lock"), new FileStorage(__DIR__ . "/sessions", "sess-", serializer: new NativeSerializer, sessionLifetime: 86400)));
+$server = SocketHttpServer::createForDirectAccess($logger, connectionLimitPerIp: 300);
+foreach ($listenAddresses as $listenAddress) {
+	$server->expose($listenAddress);
+}
+
+$errorHandler = new class implements ErrorHandler {
+	public function handleError(int $status, string $reason = null, Request $request = null): Response {
+		return requestCallable(function (Request $request, Tpl $tpl) use ($status, $reason) {
+			$tpl->load(__DIR__ . "/templates/ErrorPage.php");
+			$tpl->set("title", "$status $reason");
+			$tpl->set("message", $status === HttpStatus::NOT_FOUND ? "Page not found" : "Internal server error");
+			return $tpl->render($status);
+		})($request);
+	}
+};
+
+$router = new Router($server, $logger, $errorHandler);
+$router->setFallback(new DocumentRoot($server, $errorHandler, __DIR__ . "/public"));
 
 function addRoute(string $method, string $uri, callable $callable, ?Permission $permission = null) {
 	global $router, $routePermissionMap;
@@ -252,10 +267,10 @@ function addRoute(string $method, string $uri, callable $callable, ?Permission $
 		$routePermissionMap[ltrim($uri, "/")] = $permission;
 	}
 
-	$router->addRoute($method, $uri, new CallableRequestHandler(requestCallable($callable, $permission)));
+	$router->addRoute($method, $uri, new ClosureRequestHandler(requestCallable($callable, $permission)));
 }
 
-function json_response($data, int $status = Status::OK) {
+function json_response($data, int $status = HttpStatus::OK) {
 	return new Response(isset($data["error"]) ? 418 : $status, ["Content-Type" => "application/json"], json_encode($data));
 }
 
@@ -274,8 +289,8 @@ addRoute("GET", "/Logout", $logout->logoutUser(...));
 
 $playerListing = $injector->make(Responder\PlayerListing::class);
 addRoute("GET", "/players", $playerListing->show(...), Permission::View_Players);
-addRoute("POST", "/players/stat/add", $playerListing->addStat(...), Permission::View_Players);
-addRoute("POST", "/players/stat/remove", $playerListing->removeStat(...), Permission::View_Players);
+addRoute("POST", "/players/stat/add", $playerListing->addStat(...), Permission::Manage_Stats);
+addRoute("POST", "/players/stat/remove", $playerListing->removeStat(...), Permission::Manage_Stats);
 
 $onlinePlayers = $injector->make(Responder\OnlinePlayers::class);
 addRoute("GET", "/players/online", $onlinePlayers->show(...), Permission::Manage_Players);
@@ -320,26 +335,12 @@ addRoute("POST", "/server/restart/setInterval", $serverStats->updateRestartInter
 addRoute("POST", "/server/maintenance/enable", $serverStats->enableMaintenance(...), Permission::Manage_Server);
 addRoute("POST", "/server/maintenance/disable", $serverStats->disableMaintenance(...), Permission::Manage_Server);
 addRoute("POST", "/server/save", $serverStats->saveWorld(...), Permission::Manage_Server);
-$router->addRoute("GET", "/server/livestats", new Websocket($serverStats));
+$router->addRoute("GET", "/server/livestats", new Websocket($server, $logger, $serverStats, $serverStats));
 
 $logs = $injector->make(Responder\Log::class);
-$router->addRoute("GET", "/logs/live", new Websocket($logs));
+$router->addRoute("GET", "/logs/live", new Websocket($server, $logger, $logs, $logs));
 
-$sessions = new SessionMiddleware(new Driver(new AsyncFileKeyedMutex(__DIR__ . "/sessions/%s.lock"), new FileStorage(__DIR__ . "/sessions", "sess-", serializer: new NativeSerializer, sessionLifetime: 86400)));
-$server = new HttpServer($servers, Middleware\stack($router, $sessions), $logger);
-
-$server->setErrorHandler(new class implements ErrorHandler {
-	public function handleError(int $statusCode, string $reason = null, Request $request = null): Response {
-		return requestCallable(function (Request $request, Tpl $tpl) use ($statusCode, $reason) {
-			$tpl->load(__DIR__ . "/templates/ErrorPage.php");
-			$tpl->set("title", "$statusCode $reason");
-			$tpl->set("message", $statusCode === Status::NOT_FOUND ? "Page not found" : "Internal server error");
-			return $tpl->render($statusCode);
-		})($request);
-	}
-});
-
-$server->start();
+$server->start(Middleware\stackMiddleware($router, $sessions), $errorHandler);
 
 if (!$db->query("SELECT id FROM user LIMIT 1")->fetchArray()) {
 	$logger->warning("Server has successfully started. Open the webinterface in the browser to create your first admin account.");

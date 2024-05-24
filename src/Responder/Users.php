@@ -2,15 +2,13 @@
 
 namespace ValheimServerUI\Responder;
 
+use Amp\Http\Server\FormParser\Form;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Router;
 use ValheimServerUI\Permission;
 use ValheimServerUI\PermissionSet;
-use ValheimServerUI\Proto\ModList;
-use ValheimServerUI\ServerState;
 use ValheimServerUI\Tpl;
 use ValheimServerUI\ValheimSocket;
-use function Amp\Http\Server\FormParser\parseForm;
 use function ValheimServerUI\json_response;
 
 class Users {
@@ -40,7 +38,7 @@ class Users {
 	}
 
 	public function createUser(Request $request, \SQLite3 $db) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$username = $form->getValue("username") ?? "";
 		$group_id = $form->getValue("group_id") ?? 0;
 		$steam_id = preg_replace("([^0-9])", "", $form->getValue("steam_id") ?? "");
@@ -91,7 +89,7 @@ class Users {
 	public function setGroup(Request $request, \SQLite3 $db) {
 		$args = $request->getAttribute(Router::class);
 		$user_id = $args["user_id"] ?? 0;
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$group_id = $form->getValue("group_id") ?? 0;
 
 		$stmt = $db->prepare('SELECT * FROM permissionGroup WHERE group_id = :group_id');
@@ -112,7 +110,7 @@ class Users {
 	public function updateSteamId(Request $request, \SQLite3 $db) {
 		$args = $request->getAttribute(Router::class);
 		$user_id = $args["user_id"] ?? 0;
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$steam_id = preg_replace("([^0-9])", "", $form->getValue("steam_id") ?? "");
 
 		$stmt = $db->prepare('UPDATE user SET steam_id = :steam_id WHERE id = :id');

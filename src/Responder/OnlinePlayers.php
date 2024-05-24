@@ -2,14 +2,11 @@
 
 namespace ValheimServerUI\Responder;
 
+use Amp\Http\Server\FormParser\Form;
 use Amp\Http\Server\Request;
-use Google\Protobuf\Internal\Message;
 use ValheimServerUI\Proto\IngameMessage;
-use ValheimServerUI\Proto\PlayerList;
-use ValheimServerUI\ServerState;
 use ValheimServerUI\Tpl;
 use ValheimServerUI\ValheimSocket;
-use function Amp\Http\Server\FormParser\parseForm;
 use function Amp\Http\Server\redirectTo;
 
 class OnlinePlayers {
@@ -28,7 +25,7 @@ class OnlinePlayers {
 	}
 
 	public function sendMessage(Request $request) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$steamIds = $form->getValueArray("steamId");
 		$message = new IngameMessage();
 		$message->setSteamId($steamIds);
@@ -40,7 +37,7 @@ class OnlinePlayers {
 	}
 
 	public function kick(Request $request) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$steamIds = $form->getValueArray("steamId");
 		$message = new IngameMessage();
 		$message->setSteamId($steamIds);

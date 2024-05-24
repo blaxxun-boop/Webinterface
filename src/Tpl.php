@@ -2,8 +2,8 @@
 
 namespace ValheimServerUI;
 
+use Amp\Http\HttpStatus;
 use Amp\Http\Server\Response;
-use Amp\Http\Status;
 
 class Tpl {
 	private string $file;
@@ -27,7 +27,7 @@ class Tpl {
 	    }
 	}
 
-	public function render(int $status = Status::OK, array $headers = []): Response {
+	public function render(int $status = HttpStatus::OK, array $headers = []): Response {
 		return new Response($status, $headers + ['content-type' => 'text/html, charset=utf8'], $this->singlePage($this->file));
 	}
 

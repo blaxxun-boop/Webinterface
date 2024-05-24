@@ -2,14 +2,12 @@
 
 namespace ValheimServerUI\Responder;
 
+use Amp\Http\Server\FormParser\Form;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Router;
 use ValheimServerUI\Permission;
-use ValheimServerUI\Proto\ModList;
-use ValheimServerUI\ServerState;
 use ValheimServerUI\Tpl;
 use ValheimServerUI\ValheimSocket;
-use function Amp\Http\Server\FormParser\parseForm;
 use function Amp\Http\Server\redirectTo;
 
 class Permissions {
@@ -51,7 +49,7 @@ class Permissions {
 	}
 
 	public function createGroup(Request $request, \SQLite3 $db) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$stmt = $db->prepare('INSERT INTO permissionGroup (groupname) VALUES (:groupname)');
 		$stmt->bindValue("groupname", $form->getValue("groupname"));
 		$stmt->execute();
@@ -60,7 +58,7 @@ class Permissions {
 	}
 
 	public function updateGroup(Request $request, Tpl $tpl, \SQLite3 $db) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$args = $request->getAttribute(Router::class);
 		$group_id = $args["group_id"] ?? 0;
 
@@ -86,7 +84,7 @@ class Permissions {
 	}
 
 	public function deleteGroup(Request $request, \SQLite3 $db) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 		$group_id = $form->getValue("group_id");
 		if ($group_id > 1) {
 			$stmt = $db->prepare('UPDATE user SET group_id = 0 WHERE group_id = :group_id');

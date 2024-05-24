@@ -2,10 +2,9 @@
 
 namespace ValheimServerUI;
 
-use Amp\Deferred;
+use Amp\DeferredFuture;
 use Amp\Future;
 use Monolog\Logger;
-use function Amp\coroutine;
 use function Amp\File\deleteFile;
 use function Amp\File\write;
 
@@ -48,7 +47,7 @@ abstract class ServerManager {
 	public function hardRestart(): Future {
 		if (!$this->activeHardRestart) {
 			$this->activeHardRestart = true;
-			$this->pendingRestart = coroutine(function() {
+			$this->pendingRestart = \Amp\async(function() {
 				$this->restart();
 				$this->pendingRestart = null;
 				$this->activeHardRestart = false;
@@ -59,9 +58,9 @@ abstract class ServerManager {
 
 	public function gracefulRestart(): Future {
 		if (!$this->pendingRestart) {
-			$this->pendingRestart = coroutine(function () {
+			$this->pendingRestart = \Amp\async(function () {
 				if (!$this->state->maintenance->getMaintenanceActive()) {
-					$future = ($this->state->waitingForMaintenance ??= new Deferred)->getFuture();
+					$future = ($this->state->waitingForMaintenance ??= new DeferredFuture)->getFuture();
 					$this->enableMaintenance();
 					if (!$future->await()) {
 						return;
@@ -81,11 +80,11 @@ abstract class ServerManager {
 	}
 
 	public function enableMaintenance() {
-		write($this->state->serverConfig->getPluginsPath() . "/maintenance", "");
+		write($this->state->serverConfig->getConfigPath() . "/maintenance", "");
 	}
 
 	public function disableMaintenance() {
-		deleteFile($this->state->serverConfig->getPluginsPath() . "/maintenance");
+		deleteFile($this->state->serverConfig->getConfigPath() . "/maintenance");
 	}
 
 	abstract public function status(): ServiceStatus;

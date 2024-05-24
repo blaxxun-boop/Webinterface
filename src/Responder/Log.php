@@ -2,38 +2,41 @@
 
 namespace ValheimServerUI\Responder;
 
-use Amp\Http\Server\HttpServer;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
-use Amp\Websocket\Client;
-use Amp\Websocket\Server\ClientHandler;
-use Amp\Websocket\Server\Gateway;
-use Amp\Websocket\Server\WebsocketServerObserver;
+use Amp\Websocket\Server\Rfc6455Acceptor;
+use Amp\Websocket\Server\WebsocketAcceptor;
+use Amp\Websocket\Server\WebsocketClientGateway;
+use Amp\Websocket\Server\WebsocketClientHandler;
+use Amp\Websocket\Server\WebsocketGateway;
+use Amp\Websocket\WebsocketClient;
 use ValheimServerUI\Permission;
 use ValheimServerUI\ServerManager;
-use function Amp\coroutine;
 use function ValheimServerUI\requestCallable;
 
-class Log implements ClientHandler, WebsocketServerObserver {
-	public function __construct(private ServerManager $serverManager) {}
+class Log implements WebsocketAcceptor, WebsocketClientHandler {
+	private WebsocketAcceptor $acceptor;
+	private WebsocketGateway $gateway;
 
-	public function onStart(HttpServer $server, Gateway $gateway): void {
-		coroutine(function () use ($gateway) {
+	public function __construct(private ServerManager $serverManager) {
+		$this->acceptor = new Rfc6455Acceptor;
+		$this->gateway = new WebsocketClientGateway;
+		\Amp\async(function() {
 			foreach ($this->serverManager->logIterator() as $logLine) {
-				$gateway->broadcast($logLine)->ignore();
+				$this->gateway->broadcastText($logLine)->ignore();
 			}
 		});
 	}
 
-	public function onStop(HttpServer $server, Gateway $gateway): void {}
-
-	public function handleHandshake(Gateway $gateway, Request $request, Response $response): Response {
-		return requestCallable(function (Request $request) use ($response) {
-			return $response;
+	public function handleHandshake(Request $request): Response {
+		return requestCallable(function (Request $request) {
+			return $this->acceptor->handleHandshake($request);
 		}, Permission::View_Server)($request);
 	}
 
-	public function handleClient(Gateway $gateway, Client $client, Request $request, Response $response): void {
+	public function handleClient(WebsocketClient $client, Request $request, Response $response): void {
+		$this->gateway->addClient($client);
+
 		while ($message = $client->receive()) {
 			// nothing to handle
 		}

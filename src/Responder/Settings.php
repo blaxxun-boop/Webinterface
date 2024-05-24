@@ -7,8 +7,6 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Session\Session;
 use ValheimServerUI\ServerState;
 use ValheimServerUI\Tpl;
-use function Amp\Http\Server\FormParser\parseForm;
-use function Amp\Http\Server\redirectTo;
 use function ValheimServerUI\json_response;
 
 class Settings {
@@ -22,7 +20,7 @@ class Settings {
 	}
 
 	public function changePassword(Request $request, Tpl $tpl, \SQLite3 $db, Session $session) {
-		$form = parseForm($request);
+		$form = Form::fromRequest($request);
 
 		$stmt = $db->prepare('SELECT * FROM user WHERE id = :user_id');
 		$stmt->bindValue("user_id", $session->get("user_id"));

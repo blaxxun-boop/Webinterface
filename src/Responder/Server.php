@@ -3,15 +3,14 @@
 namespace ValheimServerUI\Responder;
 
 use Amp\Http\Server\FormParser\Form;
-use Amp\Http\Server\HttpServer;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
-use Amp\Http\Server\ServerObserver;
-use Amp\Http\Server\Session\Session;
-use Amp\Websocket\Client;
-use Amp\Websocket\Server\ClientHandler;
-use Amp\Websocket\Server\Gateway;
-use Amp\Websocket\Server\WebsocketServerObserver;
+use Amp\Websocket\Server\Rfc6455Acceptor;
+use Amp\Websocket\Server\WebsocketAcceptor;
+use Amp\Websocket\Server\WebsocketClientGateway;
+use Amp\Websocket\Server\WebsocketClientHandler;
+use Amp\Websocket\Server\WebsocketGateway;
+use Amp\Websocket\WebsocketClient;
 use Revolt\EventLoop;
 use ValheimServerUI\PeriodicRestarter;
 use ValheimServerUI\Permission;
@@ -20,66 +19,22 @@ use ValheimServerUI\ServerState;
 use ValheimServerUI\ServiceStatus;
 use ValheimServerUI\Tpl;
 use ValheimServerUI\ValheimSocket;
-use function Amp\Http\Server\FormParser\parseForm;
 use function Amp\Http\Server\redirectTo;
 use function ValheimServerUI\json_response;
 use function ValheimServerUI\requestCallable;
 
-class Server implements ClientHandler, WebsocketServerObserver {
+class Server implements WebsocketAcceptor, WebsocketClientHandler {
+	private WebsocketAcceptor $acceptor;
+	private WebsocketGateway $gateway;
 	private int $cpuNumber;
 	private int $maxMemory = 0;
 	private array $memoryUsed = [];
 	private array $loadAvgs = [];
 	private string $sysstatWatcher;
-	/** @var Client[] */
-	private array $clients = [];
 
 	public function __construct(public ServerState $state) {
-	}
-
-	public function show(Request $request, Tpl $tpl, ServerManager $serverManager, PeriodicRestarter $restarter) {
-		$serverManager->stateWatchers[__CLASS__] = $this->broadcastServiceStateUpdate(...);
-
-		$tpl->load(__DIR__ . "/../../templates/Server.php");
-		$tpl->set("cpuNumber", $this->cpuNumber);
-		$tpl->set("maxMemory", $this->maxMemory);
-		$tpl->set("memoryUsed", $this->memoryUsed);
-		$tpl->set("loadAvgs", $this->loadAvgs);
-		$tpl->set("processId", $this->state->serverConfig->getProcessId());
-		$tpl->set("maintenanceActive", $this->state->maintenance->getMaintenanceActive());
-		$tpl->set("maintenanceStartTime", $this->state->maintenance->getStartTime());
-		$tpl->set("serviceState", $serverManager->status());
-		$tpl->set("automaticRestartInterval", round($restarter->restartInterval / 3600, 3));
-		$tpl->set("automaticRestartNext", $restarter->nextCheck);
-		$tpl->set("logHistory", $serverManager->readLog());
-		return $tpl->render();
-	}
-
-	public function handleHandshake(Gateway $gateway, Request $request, Response $response): Response {
-		return requestCallable(function (Request $request) use ($response) {
-			return $response;
-		}, Permission::View_Server)($request);
-	}
-
-	public function handleClient(Gateway $gateway, Client $client, Request $request, Response $response): void {
-		$this->clients[$client->getId()] = $client;
-		try {
-			while ($message = $client->receive()) {
-				// nothing to handle
-			}
-		} finally {
-			unset($this->clients[$client->getId()]);
-		}
-	}
-
-	private function broadcastServiceStateUpdate(ServiceStatus $serviceStatus) {
-		$json = \json_encode(["serviceState" => $serviceStatus]);
-		foreach ($this->clients as $client) {
-			$client->send($json)->ignore();
-		}
-	}
-
-	public function onStart(HttpServer $server, Gateway $gateway): void {
+		$this->acceptor = new Rfc6455Acceptor;
+		$this->gateway = new WebsocketClientGateway;
 		$this->cpuNumber = \Amp\Cluster\countCpuCores();
 		$this->sysstatWatcher = EventLoop::repeat(5, function () {
 			$this->loadAvgs[\time()] = $loadAvg = \sys_getloadavg();
@@ -110,13 +65,47 @@ class Server implements ClientHandler, WebsocketServerObserver {
 			}
 
 			$json = \json_encode(["memory" => array_values($this->memoryUsed), "loadAvg" => array_values($this->loadAvgs)]);
-			foreach ($this->clients as $client) {
-				$client->send($json)->ignore();
-			}
+			$this->gateway->broadcastText($json)->ignore();
 		});
 	}
 
-	public function onStop(HttpServer $server, Gateway $gateway): void {
+	public function show(Request $request, Tpl $tpl, ServerManager $serverManager, PeriodicRestarter $restarter) {
+		$serverManager->stateWatchers[__CLASS__] = $this->broadcastServiceStateUpdate(...);
+
+		$tpl->load(__DIR__ . "/../../templates/Server.php");
+		$tpl->set("cpuNumber", $this->cpuNumber);
+		$tpl->set("maxMemory", $this->maxMemory);
+		$tpl->set("memoryUsed", $this->memoryUsed);
+		$tpl->set("loadAvgs", $this->loadAvgs);
+		$tpl->set("processId", $this->state->serverConfig->getProcessId());
+		$tpl->set("maintenanceActive", $this->state->maintenance->getMaintenanceActive());
+		$tpl->set("maintenanceStartTime", $this->state->maintenance->getStartTime());
+		$tpl->set("serviceState", $serverManager->status());
+		$tpl->set("automaticRestartInterval", round($restarter->restartInterval / 3600, 3));
+		$tpl->set("automaticRestartNext", $restarter->nextCheck);
+		$tpl->set("logHistory", $serverManager->readLog());
+		return $tpl->render();
+	}
+
+	public function handleHandshake(Request $request): Response {
+		return requestCallable(function (Request $request) {
+			return $this->acceptor->handleHandshake($request);
+		}, Permission::View_Server)($request);
+	}
+
+	public function handleClient(WebsocketClient $client, Request $request, Response $response): void {
+		$this->gateway->addClient($client);
+		while ($message = $client->receive()) {
+			// nothing to handle
+		}
+	}
+
+	private function broadcastServiceStateUpdate(ServiceStatus $serviceStatus) {
+		$json = \json_encode(["serviceState" => $serviceStatus]);
+		$this->gateway->broadcastText($json)->ignore();
+	}
+
+	public function __destruct() {
 		EventLoop::cancel($this->sysstatWatcher);
 	}
 
@@ -141,7 +130,7 @@ class Server implements ClientHandler, WebsocketServerObserver {
 	}
 
 	public function updateRestartInterval(Request $request, PeriodicRestarter $restarter): Response {
-		$restarter->updateRestartInterval((parseForm($request)->getValue("restartinterval") ?? 0) * 3600);
+		$restarter->updateRestartInterval((Form::fromRequest($request)->getValue("restartinterval") ?? 0) * 3600);
 		return redirectTo("/server");
 	}
 
