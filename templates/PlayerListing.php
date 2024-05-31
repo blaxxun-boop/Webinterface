@@ -25,6 +25,7 @@ if ($table->getPlayerList()->count()) {
 <div id="main" role="main">
     <div class="page-main">
         <?php if ($canManage): ?>
+			<form action="./players/stat/remove" method="post" id="column-remove"></form>
 			<form action="./players/stat/add" style="float: right;" method="post">
 				<label>
 					Add Stat column:
@@ -33,7 +34,7 @@ if ($table->getPlayerList()->count()) {
 					</select>
 				</label>
 				<input type="submit" />
-			</div>
+			</form>
         <?php endif; ?>
         <table class="fancyTable sortable">
             <thead>
@@ -41,7 +42,7 @@ if ($table->getPlayerList()->count()) {
 					<th class="textLeft">ID</th>
 					<th class="textLeft">Name</th>
 					<?php foreach ($stats as $stat): ?>
-					<th class="textRight"><?=htmlspecialchars(formatStat($stat)); if ($canManage): ?><form style="display: inline;" action="./players/stat/remove" method="post"><button type="submit" name="stat" value="<?=htmlspecialchars($stat)?>" title="Remove" class="decent-remove-button">X</button></form><?php endif; ?></th>
+					<th class="textRight"><?=htmlspecialchars(formatStat($stat)); if ($canManage): ?><button type="submit" form="column-remove" name="stat" value="<?=htmlspecialchars($stat)?>" title="Remove" class="decent-remove-button">X</button><?php endif; ?></th>
 					<?php endforeach; ?>
 					<th class="textRight">Last online</th>
 				</tr>

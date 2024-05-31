@@ -47,7 +47,7 @@ final class AsyncFileKeyedMutex implements KeyedMutex
         }
 
         // Return a lock object that can be used to release the lock on the mutex.
-        $lock = new Lock(0, fn() => $this->release($filename));
+        $lock = new Lock(fn() => $this->release($filename));
 
         $file->close();
 
